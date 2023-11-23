@@ -1,4 +1,5 @@
 import Product from "../models/productModel.js";
+import SubProd from "../models/subProductsModel.js";
 
 
 const addProduct = async (req, res) => {
@@ -28,7 +29,7 @@ const addProduct = async (req, res) => {
         
 };
 
-const getCustomers = async (req, res) =>{
+const getProducts = async (req, res) =>{
 
     const allProducts = await Product.find({});
     res.status(200).json(allProducts);
@@ -48,19 +49,27 @@ const getProductById = async (req, res) =>{
       
   }
 
-  const deleteProduct = async (req, res) =>{
-
-    const delprod = await Product.findById(req.params.id);
-    if(delprod){
-    
-     await Product.deleteOne({_id: delprod._id});
-     res.status(200).json({message: 'Product deleted successfully'});
+  const deleteProduct = async (req, res) => {
+    try {
+      const delprod = await Product.findById(req.params.id);
+  
+      if (!delprod) {
+        return res.status(400).json('Product not found');
+      }
+  
+      // Delete the main product
+      await Product.deleteOne({ _id: delprod._id });
+  
+      // Delete all subproducts associated with the main product
+      await SubProd.deleteMany({ product: delprod._id });
+  
+      res.status(200).json({ message: 'Product and associated subproducts deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting product and associated subproducts:', error);
+      res.status(500).json({ message: 'Internal server error', error });
     }
-    else{
-     res.status(400).json('Product not found');
-    }
-     
- } 
+  };
+  
 
 
  const udpateProduct = async (req, res) =>{
@@ -83,4 +92,10 @@ const getProductById = async (req, res) =>{
   }
 
 
-export {addProduct,getCustomers,getProductById,deleteProduct,udpateProduct}
+export {
+  addProduct,
+  getProducts,
+  getProductById,
+  deleteProduct,
+  udpateProduct
+}

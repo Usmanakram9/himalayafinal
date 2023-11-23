@@ -93,7 +93,7 @@ const deleteCustomer = async (req, res) =>{
       });
     }
     else{
-      console.error(error);
+      console.error('error');
       res.status(400).json('customer not found');
     } 
        

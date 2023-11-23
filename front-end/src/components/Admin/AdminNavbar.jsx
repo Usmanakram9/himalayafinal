@@ -12,11 +12,13 @@ import {
 
 const AdminNavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [prodbar, setProdBar] = useState(false);
+  const [usersBar, setUsersBar] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+
   return (
     <>
-      <div className="flex antialiased text-gray-900 bg-white dark:bg-dark dark:text-light relative overflow-hidden" style={{fontFamily: "Times New Roman"}}>
+      <div className="flex antialiased text-gray-900 bg-white dark:bg-dark dark:text-light relative overflow-hidden">
         <div
           className={`${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -72,13 +74,32 @@ const AdminNavBar = () => {
                 <>
                   <li className="flex items-center text-black hover:text-yellow-500 ml-8 mt-2">
                     <FontAwesomeIcon icon={faHome} className="w-5 h-5 mr-2" />
-                    <Link to="/admin-panel/products/addproduct">Add Product</Link>
+                    <Link to="/admin-panel/products/addproduct">
+                      Add Product
+                    </Link>
                   </li>
                   <li className="flex items-center text-black hover:text-yellow-500 ml-8 mt-2">
                     <FontAwesomeIcon icon={faHome} className="w-5 h-5 mr-2" />
                     <Link to="/admin-panel/products/addsubproduct">
                       Add Sub Product
                     </Link>
+                  </li>
+                </>
+              )}
+              <li>
+                <button
+                  onClick={() => setUsersBar(!usersBar)}
+                  className="flex items-center text-black hover:text-yellow-500"
+                >
+                  <FontAwesomeIcon icon={faHome} className="w-5 h-5 mr-2" />
+                  Users
+                </button>
+              </li>
+              {usersBar && (
+                <>
+                  <li className="flex items-center text-black hover:text-yellow-500 ml-8 mt-2">
+                    <FontAwesomeIcon icon={faHome} className="w-5 h-5 mr-2" />
+                    <Link to="/admin-panel/users">All Users</Link>
                   </li>
                 </>
               )}
@@ -174,7 +195,6 @@ const AdminNavBar = () => {
                     icon={faArrowLeft}
                     className="w-3 h-3 md:w-5 md:h-3 ml-2"
                   />
-
                   {/* Dropdown content */}
                 </div>
               </div>

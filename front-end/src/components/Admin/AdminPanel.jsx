@@ -12,7 +12,7 @@ const AdminPanel = () => {
   return (
     <>
       <AdminNavbar />
-      <div className="flex flex-wrap gap-4 mt-10 mx-auto w-11/12" style={{fontFamily: "Times New Roman"}}>
+      <div className="flex flex-wrap gap-4 mt-10 mx-auto w-11/12">
         <div className="flex flex-wrap justify-between w-full">
           <div className="flex-col items-center justify-center md:flex-row md:items-start md:text-left mr-4">
             <p className="text-lg md:text-xl font-semibold mb-1 md:mr-4">
