@@ -36,7 +36,7 @@ const AdminPanel = () => {
                 })}
               </div>
             </div>
-            <FontAwesomeIcon icon={faCalendar} className="text-blue-500" />
+            <FontAwesomeIcon icon={faCalendar} className="text-gray-900" />
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@ const AdminPanel = () => {
       <div className="flex flex-wrap justify-center gap-4 mx-auto w-full">
         <div className="flex flex-wrap my-5 mx-2">
           <div className="w-full lg:w-1/3 p-2">
-            <div className="flex items-center flex-row w-full bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500 from-indigo-500 via-purple-500 to-pink-500 rounded-md p-3">
+            <div className="flex items-center flex-row w-full bg-gray-900 hover:bg-gray-800 hover:scale-105 rounded-md p-3 transition-all duration-300 cursor-pointer">
               <Link to="/">
                 <div className="flex text-indigo-500 dark:text-white items-center bg-white dark:bg-[#0F172A] p-2 rounded-md flex-none w-8 h-8 md:w-12 md:h-12 ">
                   <svg
@@ -87,7 +87,7 @@ const AdminPanel = () => {
           </div>
 
           <div className="w-full md:w-1/2 lg:w-1/3 p-2 ">
-            <div className="flex items-center flex-row w-full bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500 from-indigo-500 via-purple-500 to-pink-500 rounded-md p-3">
+            <div className="flex items-center flex-row w-full bg-gray-900 hover:bg-gray-800 hover:scale-105 rounded-md p-3 transition-all duration-300 cursor-pointer">
               <div className="flex text-indigo-500 dark:text-white items-center bg-white dark:bg-[#0F172A] p-2 rounded-md flex-none w-8 h-8 md:w-12 md:h-12 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +128,7 @@ const AdminPanel = () => {
           </div>
 
           <div className="w-full md:w-1/2 lg:w-1/3 p-2 ">
-            <div className="flex items-center flex-row w-full bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500 from-indigo-500 via-purple-500 to-pink-500 rounded-md p-3">
+            <div className="flex items-center flex-row w-full  bg-gray-900 hover:bg-gray-800 hover:scale-105 rounded-md p-3 transition-all duration-300 cursor-pointer">
               <div className="flex text-indigo-500 dark:text-white items-center bg-white dark:bg-[#0F172A] p-2 rounded-md flex-none w-8 h-8 md:w-12 md:h-12 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -168,7 +168,7 @@ const AdminPanel = () => {
             </div>
           </div>
           <div className="w-full md:w-1/2 lg:w-1/3 p-2 ">
-            <div className="flex items-center flex-row w-full bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500 from-indigo-500 via-purple-500 to-pink-500 rounded-md p-3">
+            <div className="flex items-center flex-row w-full  bg-gray-900 hover:bg-gray-800 hover:scale-105 rounded-md p-3 transition-all duration-300 cursor-pointer">
               <div className="flex text-indigo-500 dark:text-white items-center bg-white dark:bg-[#0F172A] p-2 rounded-md flex-none w-8 h-8 md:w-12 md:h-12 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +208,7 @@ const AdminPanel = () => {
             </div>
           </div>
           <div className="w-full md:w-1/2 lg:w-1/3 p-2 ">
-            <div className="flex items-center flex-row w-full bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500 from-indigo-500 via-purple-500 to-pink-500 rounded-md p-3">
+            <div className="flex items-center flex-row w-full  bg-gray-900 hover:bg-gray-800 hover:scale-105 rounded-md p-3 transition-all duration-300 cursor-pointer">
               <div className="flex text-indigo-500 dark:text-white items-center bg-white dark:bg-[#0F172A] p-2 rounded-md flex-none w-8 h-8 md:w-12 md:h-12 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -248,7 +248,7 @@ const AdminPanel = () => {
             </div>
           </div>
           <div className="w-full md:w-1/2 lg:w-1/3 p-2">
-            <div className="flex items-center flex-row w-full bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500 from-indigo-500 via-purple-500 to-pink-500 rounded-md p-3">
+            <div className="flex items-center flex-row w-full  bg-gray-900 hover:bg-gray-800 hover:scale-105 rounded-md p-3 transition-all duration-300 cursor-pointer">
               <div className="flex text-indigo-500 dark:text-white items-center bg-white dark:bg-[#0F172A] p-2 rounded-md flex-none w-8 h-8 md:w-12 md:h-12 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

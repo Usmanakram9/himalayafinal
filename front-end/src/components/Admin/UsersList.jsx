@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import useSignupStore from "../../stores/signupStore";
 import AdminNavBar from "./AdminNavbar";
 import AdinFooter from "./AdminFooter";
+import "../../assets/css/UserList.css";
 
 const UsersList = () => {
   const { data, getUsers } = useSignupStore();
@@ -13,7 +14,7 @@ const UsersList = () => {
   return (
     <>
       <AdminNavBar />
-      <div className="flex flex-col items-center justify-center h-full">
+      <div className="userList flex flex-col items-center justify-center h-full">
         <div className="container mx-auto">
           <h1 className="text-3xl sm:text-4xl text-center dark:text-black font-bold mb-8">
             Customers List
@@ -25,7 +26,7 @@ const UsersList = () => {
                 className="bg-white overflow-hidden shadow-md rounded-lg dark:bg-gray-800 dark:border-gray-700 transition transform hover:scale-105"
               >
                 <div className="p-4">
-                  <h2 className="text-base sm:text-lg font-semibold text-blue-600 dark:text-blue-300 mb-2">
+                  <h2 className="text-base sm:text-lg font-semibold text-white dark:text-white mb-2">
                     {user.firstname} {user.lastname}
                   </h2>
                   <div className="text-xs sm:text-sm mb-4">

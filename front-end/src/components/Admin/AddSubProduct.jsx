@@ -126,7 +126,7 @@ const AddSubProduct = () => {
       <AdminNavBar />
       <div className="flex flex-col items-center justify-center h-full">
         <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-          <div className="bg-gray-700 rounded-md p-4">
+          <div className="bg-gray-900 rounded-md p-4">
             <h1 className="text-2xl font-bold text-white mb-4">
               Add Sub Product
             </h1>
@@ -151,7 +151,7 @@ const AddSubProduct = () => {
                 id="selectProduct"
                 value={selectedProduct}
                 onChange={handleDropdownChange}
-                className="p-2 rounded border-0 bg-transparent outline-none text-white placeholder-black dark:placeholder-gray-500 dark:text-black"
+                className="p-2 rounded border-0 bg-gray-900 outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-white"
               >
                 {productData &&
                   productData.map((option) => (
@@ -185,7 +185,7 @@ const AddSubProduct = () => {
               />
             </div>
             <button
-              className="bg-white dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-indigo-500 hover:text-white transition duration-300"
+              className="bg-white dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
               onClick={handleAddProduct}
             >
               {buttonName}
@@ -194,13 +194,13 @@ const AddSubProduct = () => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center h-full mt-24">
-        <div className="relative w-4/5 overflow-x-auto shadow-md sm:rounded-lg">
-          <h1 className="text-4xl text-black text-center mb-12">
+      <div className="flex justify-center items-center h-full mt-8 md:mt-24">
+        <div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
+          <h1 className="text-4xl text-black text-center mb-8 md:mb-12">
             All Sub-Products
           </h1>
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase dark:bg-gray-900 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   Product name

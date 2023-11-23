@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminNavBar from "./AdminNavbar";
 import AdminFooter from "./AdminFooter";
 import useProductStore from "../../stores/productStore";
@@ -19,6 +19,10 @@ const AddProduct = () => {
   const [buttonName, setButtonName] = useState("Add");
   const [selectedProductId, setSelectedProductId] = useState(null);
 
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
+
   const addProductHandler = async (e) => {
     e.preventDefault();
 
@@ -37,12 +41,6 @@ const AddProduct = () => {
     } catch (error) {
       showErrorToast(`Error: ${error.message}`);
     }
-  };
-
-  const getAllProducts = (e) => {
-    e.preventDefault();
-    getProducts();
-    console.log(data);
   };
 
   const deleteHandler = async (productId) => {
@@ -65,18 +63,18 @@ const AddProduct = () => {
       <AdminNavBar />
       <div className="flex flex-col items-center justify-center h-full">
         <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-          <div className="bg-gray-700 rounded-md p-4">
+          <div className="bg-gray-900 rounded-md p-4">
             <h1 className="text-xl font-bold text-white mb-4">Add Product</h1>
-            <div className="flex">
+            <div className="flex flex-col md:flex-row">
               <input
                 type="text"
                 placeholder="Product Name"
                 value={productName}
                 onChange={(e) => setProductName(e.target.value)}
-                className="flex-grow p-2 rounded-l border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-white"
+                className="flex-grow p-2 rounded-l border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-white mb-2 md:mb-0 md:mr-2"
               />
               <button
-                className="bg-white dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded-r hover:bg-indigo-500 hover:text-white transition duration-300"
+                className="bg-white dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded-r hover:bg-gray-800 hover:text-white transition duration-300"
                 onClick={addProductHandler}
               >
                 {buttonName}
@@ -86,14 +84,14 @@ const AddProduct = () => {
         </div>
       </div>
 
-      {/* adding products table here */}
+      {/* Adding products table here */}
       <div className="flex justify-center items-center h-full mt-24">
-        <div className="relative w-4/5 overflow-x-auto shadow-md sm:rounded-lg">
-          <h1 className=" text-4xl text-black text-center mb-12">
+        <div className="relative w-full md:w-4/5 lg:w-3/5 xl:w-2/3 overflow-x-auto shadow-md sm:rounded-lg">
+          <h1 className="text-4xl text-black text-center mb-12">
             All Products
           </h1>
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead className="text-xs text-gray-900 uppercase dark:bg-gray-900 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   Product name
@@ -113,7 +111,7 @@ const AddProduct = () => {
                 data.map((product, index) => (
                   <tr
                     key={index}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
                   >
                     <th
                       scope="row"
@@ -145,13 +143,7 @@ const AddProduct = () => {
           </table>
         </div>
       </div>
-      <button
-        type="button"
-        className="py-2.5 px-5 ml-36 mt-20 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-        onClick={getAllProducts}
-      >
-        Get Products
-      </button>
+
       <Toast />
       <AdminFooter />
     </>

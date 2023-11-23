@@ -1,19 +1,10 @@
 import React, { useState } from "react";
 
-import { Link as RouterLink } from "react-router-dom";
-
 const NewNavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <>
-      <div className="fixed top-4 right-4 z-50">
-        <RouterLink to="/signup">
-          <button className="bg-black hover:bg-gray-900 text-white font-bold py-2 px-4 rounded">
-            Sign Up
-          </button>
-        </RouterLink>
-      </div>
       <div className="flex antialiased text-gray-900 bg-gray-100 dark:bg-dark dark:text-light relative overflow-hidden fixed z-20">
         {/* Sidebar */}
         <div
