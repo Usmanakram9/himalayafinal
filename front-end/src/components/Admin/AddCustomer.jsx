@@ -52,10 +52,17 @@ const AddCustomer = () => {
     }
   };
 
+  const style = {
+    fontFamily: "Courier New",
+  };
+
   return (
     <>
       <AdminNavBar />
-      <div className="flex flex-col items-center justify-center h-full">
+      <div
+        style={style}
+        className="flex flex-col items-center justify-center h-full"
+      >
         <div className="w-full md:w-1/2 lg:w-1/3 p-4">
           <div className="bg-gray-900 rounded-md p-4">
             <h1 className="text-2xl font-bold text-white mb-4">Add Customer</h1>

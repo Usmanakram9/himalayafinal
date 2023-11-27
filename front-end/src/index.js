@@ -10,18 +10,20 @@ import AdminLogin from './components/Admin/AdminLogin';
 import AdminPanel from './components/Admin/AdminPanel';
 import AddProduct from './components/Admin/AddProduct';
 import AddSubProduct from './components/Admin/AddSubProduct';
-import Test from './components/Test';
 import UsersList from './components/Admin/UsersList';
 import AddCustomer from './components/Admin/AddCustomer';
+import ProductDetailsScreen from './screens/ProductDetailsScreen';
 
-let isAdmin = false;
+let isAdmin = true;
 
 const router = (
   <BrowserRouter>
   {isAdmin && <NewNavBar/>}
     <Routes>
       <Route path="/" element={<App />}>
-        <Route index={true} element={<AdminLogin  />} />
+        <Route index={true} element={<Home  />} />
+        <Route path="/products" element={<ProductsScreen />} />
+        <Route path='/productdetail/:productId' element={<ProductDetailsScreen/>} />
       </Route>
 
       <Route path="/admin-panel" element={<AdminPanel />} />
@@ -30,10 +32,6 @@ const router = (
       <Route path="/admin-panel/users" element={<UsersList />} />
       <Route path="/admin-panel/addcustomer" element={<AddCustomer />} />
     
-      
-      <Route path='/home' element={<Home/>} />
-      <Route path="/products" element={<ProductsScreen />} />
-      <Route path="/test" element={<Test />} />
     </Routes>
   </BrowserRouter>
 );

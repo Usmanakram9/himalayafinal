@@ -1,10 +1,10 @@
-.product-screen {
+.product-details {
   position: relative;
   overflow: hidden;
   z-index: 1;
 }
 
-.product-screen::before {
+.product-details::before {
   content: '';
   position: absolute;
   top: 0;
@@ -23,4 +23,18 @@
 
 .container {
   min-height: 100vh;
+}
+
+/* Add this to your CSS or SCSS */
+.scrollbar-hide {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent; /* For Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scrollbar-hide::-webkit-scrollbar-thumb {
+  background-color: transparent; /* For Chrome, Safari, and Opera */
 }

@@ -12,7 +12,7 @@ const AdminPanel = () => {
   return (
     <>
       <AdminNavbar />
-      <div className="flex flex-wrap gap-4 mt-10 mx-auto w-11/12">
+      <div className="flex flex-wrap gap-4 mt-10 mx-auto w-3/4 ">
         <div className="flex flex-wrap justify-between w-full">
           <div className="flex-col items-center justify-center md:flex-row md:items-start md:text-left mr-4">
             <p className="text-lg md:text-xl font-semibold mb-1 md:mr-4">
@@ -41,7 +41,7 @@ const AdminPanel = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4 mx-auto w-full">
+      <div className="flex flex-wrap justify-center gap-4 mx-auto w-4/5">
         <div className="flex flex-wrap my-5 mx-2">
           <div className="w-full lg:w-1/3 p-2">
             <div className="flex items-center flex-row w-full bg-gray-900 hover:bg-gray-800 hover:scale-105 rounded-md p-3 transition-all duration-300 cursor-pointer">
@@ -289,8 +289,6 @@ const AdminPanel = () => {
           </div>
         </div>
       </div>
-
-      <AdminFooter />
     </>
   );
 };

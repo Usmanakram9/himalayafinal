@@ -66,7 +66,17 @@ const subProductStore = (set) => ({
       console.error('Error updating product:', error);
       set({ error, isLoading: false });
     }
-  }
+  },
+  getSubProductById: async (subProductId) => {
+    try {
+      set({ isLoading: true, error: null });
+      const response = await axios.get(`http://localhost:8000/api/subproducts/${subProductId}`);
+      set({ data: [response.data], isLoading: false });
+    } catch (error) {
+      console.error('Error fetching subproduct by ID:', error);
+      set({ error, isLoading: false });
+    }
+  },
 });
 
 const useSubProductStore = create(

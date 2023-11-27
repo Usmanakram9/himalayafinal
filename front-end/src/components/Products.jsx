@@ -1,9 +1,9 @@
 // Products.jsx
 import React from "react";
 import "../assets/css/Products.css";
-import product1 from "../assets/images/product1.jpg";
-import product2 from "../assets/images/product2.jpg";
-import product3 from "../assets/images/product1.jpg";
+import whiteMarbel from "../assets/images/product1.jpg";
+import blackMarbel from "../assets/images/marbels/black.jpg";
+import monoMarbel from "../assets/images/marbels/mono.jpeg"; // Assuming this image is for "Verona Spots"
 import { Link } from "react-router-dom";
 
 const Products = () => {
@@ -21,7 +21,7 @@ const Products = () => {
           designs to modern styles, we have something for every project.
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-          {[product1, product2, product3].map((product, index) => (
+          {[whiteMarbel, blackMarbel, monoMarbel].map((product, index) => (
             <div
               key={index}
               className="max-w-md mx-auto bg-transparent outline-1 outline outline-slate-500 text-white shadow-lg rounded-xl overflow-hidden hover:shadow-2xl hover:bg-transparent hover:outline-amber-500 hover:outline-1 hover:outline transform hover:scale-105 transition duration-300"
@@ -32,7 +32,9 @@ const Products = () => {
                 className="mb-2 w-full h-60 object-cover rounded-md hover:opacity-75 hover:scale-105 transition-all duration-300 cursor-pointer"
               />
               <h2 className="text-lg md:text-xl font-bold mb-2 text-center">
-                Product {index + 1}
+                {index === 0 && "White Marbles"}
+                {index === 1 && "Black marbles"}
+                {index === 2 && "Monocoloured marbles"}
               </h2>
             </div>
           ))}
