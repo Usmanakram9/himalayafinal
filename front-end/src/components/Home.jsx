@@ -22,7 +22,7 @@ const Home = () => {
             id="himalayasText"
             className="text-white text-4xl md:text-7xl font-bold opacity-50 mb-2 md:mb-4 font-thin tracking-wider animate__animated animate__fadeInLeft"
           >
-            Himalayas
+            Himalaya
           </div>
 
           <div className="text-white text-4xl md:text-7xl font-bold opacity-100 mb-2 md:mb-4 font-thin tracking-wider animate__animated animate__fadeInLeft">

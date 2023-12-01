@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from 'react-router-dom';
 
 const NewNavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -49,12 +50,12 @@ const NewNavBar = () => {
             </button>
             <ul className="mt-20 ml-8 space-y-4">
               <li>
-                <a
-                  href="#home"
+                <Link
+                  to="/"
                   className="text-lg text-white hover:text-amber-500"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
                 <a

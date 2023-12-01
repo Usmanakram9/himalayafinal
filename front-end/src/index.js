@@ -13,8 +13,9 @@ import AddSubProduct from './components/Admin/AddSubProduct';
 import UsersList from './components/Admin/UsersList';
 import AddCustomer from './components/Admin/AddCustomer';
 import ProductDetailsScreen from './screens/ProductDetailsScreen';
+import CreateBill from './components/Admin/CreateBill';
 
-let isAdmin = true;
+let isAdmin = false;
 
 const router = (
   <BrowserRouter>
@@ -31,6 +32,7 @@ const router = (
       <Route path="/admin-panel/products/addsubproduct" element={<AddSubProduct />} />
       <Route path="/admin-panel/users" element={<UsersList />} />
       <Route path="/admin-panel/addcustomer" element={<AddCustomer />} />
+      <Route path="/admin-panel/createBill/:id" element={<CreateBill />} />
     
     </Routes>
   </BrowserRouter>

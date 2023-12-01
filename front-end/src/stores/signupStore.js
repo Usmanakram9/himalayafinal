@@ -27,6 +27,17 @@ const signupStore = (set) => ({
       set({ error, isLoading: false });
     }
   },
+  getuserbyID: async (userid)=>{
+    try {
+      set({isLoading: true, error: null});
+      const response = await axios.get(`http://localhost:8000/api/customer/${userid}`);
+      set({data: response.data, isLoading: false});
+
+    } catch (error) {
+       console.error('Error fetching data:', error);
+      set({ error, isLoading: false });
+    }
+  }
 });
 
 const useSignupStore = create(

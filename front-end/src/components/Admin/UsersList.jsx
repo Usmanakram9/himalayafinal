@@ -3,6 +3,7 @@ import useSignupStore from "../../stores/signupStore";
 import AdminNavBar from "./AdminNavbar";
 import AdminFooter from "./AdminFooter";
 import "../../assets/css/UserList.css";
+import { Link } from "react-router-dom";
 
 const UsersList = () => {
   const { data, getUsers } = useSignupStore();
@@ -20,7 +21,7 @@ const UsersList = () => {
             Customers List
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {data.map((user) => (
+            {data?.map((user) => (
               <div
                 key={user.id}
                 className=" bg-opacity-10 bg-black overflow-hidden shadow-md rounded-lg transition transform hover:scale-105"
@@ -40,9 +41,9 @@ const UsersList = () => {
                   <button className="text-xs sm:text-sm text-blue-600 hover:underline mr-2">
                     Edit
                   </button>
-                  <button className="text-xs sm:text-sm text-green-600 hover:underline mr-2">
+                  <Link to={`/admin-panel/createBill/${user._id}`} className="text-xs sm:text-sm text-green-600 hover:underline mr-2">
                     Create Bill
-                  </button>
+                  </Link>
                   <button className="text-xs sm:text-sm text-red-600 hover:underline">
                     Delete
                   </button>
