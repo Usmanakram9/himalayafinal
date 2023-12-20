@@ -187,7 +187,7 @@ const AddCustomer = () => {
                 type="button"
                 onClick={signupHandler}
               >
-                Sign Up
+                Add Customer
               </button>
             </form>
           </div>

@@ -9,6 +9,7 @@ import customerRoute from './routes/customerRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import subproductsRoutes from './routes/subProductsRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+import billRoutes from './routes/billRoutes.js';
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ app.use('/api/customer', customerRoute);
 app.use('/api/product', productRoutes); 
 app.use('/api/subproducts', subproductsRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/bill', billRoutes);
 
 const frontendUploadsPath = path.join(new URL('.', import.meta.url).pathname, '../himalayafinal/front-end/public/uploads');
 app.use('/uploads', express.static(frontendUploadsPath));
