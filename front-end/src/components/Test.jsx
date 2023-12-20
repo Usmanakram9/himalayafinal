@@ -1,14 +1,21 @@
-import React from "react";
-import FileUpload from "./FileUpload";
+
 
 const Test = () => {
-  return (
-    <div>
-      <h1>File Upload Example</h1>
-      <FileUpload />
-      {/* <img src="/uploads/image-1700516316272.jpg" alt="bolt" /> */}
-    </div>
-  );
-};
+  
 
-export default Test;
+
+
+  return (
+    <>
+   
+
+
+    <div className='flex justify-center'>
+      <input type='text' className='w-2/3 border border-1 border-gray-400  shadow-lg p-6 rounded-lg'></input>
+      <button className='bg-red-500 text-white p-4 shadow-lg p-6 rounded-lg'>Register</button>
+    </div>
+    </>
+  )
+}
+
+export default Test
