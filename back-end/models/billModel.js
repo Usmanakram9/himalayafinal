@@ -1,10 +1,40 @@
 import mongoose from 'mongoose';
 
+const formFieldSchema = new mongoose.Schema({
+    firstname: String,
+    factoryName: String,
+    contact: String,
+    cnic: Number,
+    productName: String,
+    measurementType: String,
+    prodWidth: String,
+    prodLength: String,
+    result: String,
+    resultSquareFoot: String, 
+    resultRunningFoot: String,
+    prodQuantity: String,
+    prodThickness: String,
+    prodRate: String,
+    prodamount: String,
+    topPoolish: Boolean,
+    resultPoolish: String, 
+    poolishAmount: String,
+    edgepoolish: String,
+    edgepoolishrate: String,
+    edgepoolishamount: String,
+    subtotal: Number,
+    leatherpoolish: Boolean,
+    antiquePoolish: Boolean,
+    glossyPoolish: Boolean,
+    edgepoolishAntique: Boolean,
+    edgepoolishGlossy: Boolean,
+});
+
 const billSchema = new mongoose.Schema({
     customerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'customers',
-        required: true,
+       
     },
     customerName: {
         type: String,
@@ -21,106 +51,17 @@ const billSchema = new mongoose.Schema({
         maxlength: 100,
     },
     contactNum: {
-        type: String,
-        required: true,
+        type: String,  
+        required: true, 
     },
     cnic: {
         type: Number,
         required: true,
-        unique: true,
+        unique: false,
         min: 1000000000000,
-        max: 9999999999999,
+        max: 9999999999999999999,
     },
-    productName: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength: 2,
-        maxlength: 255,
-    },
-    squareFoot: {
-        type: Boolean,
-        default: false,
-    },
-    runningFoot: {
-        type: Boolean,
-        default: false,
-    },
-    productWidth: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    productLength: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    calculatedSquareft: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    calculatedRunningft: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    productQuantity: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    productThickness: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength: 2,
-        maxlength: 50,
-    },
-    productRate: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    topPolish: {
-        type: Boolean,
-        default: false,
-    },
-    topPolishRate: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    topPolishCalculate: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    topPolishAmount: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    edgePolish: {
-        type: Boolean,
-        default: false,
-    },
-    edgePolishRate: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    edgePolishAmount: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    edgePolishCalculate: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
+    formFields: [formFieldSchema], // Array of form data fields
     paidAmount: {
         type: Number,
         required: true,

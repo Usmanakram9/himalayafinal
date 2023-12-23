@@ -130,14 +130,15 @@ const CreateBill = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+  
     // Increment a counter (you might want to store this in state or elsewhere)
     const counter = localStorage.getItem("counter") || 0;
     const nextCounter = parseInt(counter, 10) + 1;
-
-    // Update the values for checkboxes and radio buttons
+  
+    // Add a unique identifier (id) to the form data
     const updatedFormData = {
       ...formData,
+      id: nextCounter,
       leatherpoolish: formData.leatherpoolish ? "Yes" : "No",
       antiquePoolish: formData.antiquePoolish ? "Yes" : "No",
       glossyPoolish: formData.glossyPoolish ? "Yes" : "No",
@@ -145,20 +146,20 @@ const CreateBill = () => {
       edgepoolishGlossy: formData.edgepoolishGlossy ? "Yes" : "No",
       // Add similar updates for other fields as needed
     };
-
+  
     // Save formData to local storage with a dynamic key
     const key = `formData${nextCounter}`;
     localStorage.setItem(key, JSON.stringify(updatedFormData));
-
+  
     // Update the counter in local storage
     localStorage.setItem("counter", nextCounter);
-
+  
     // Clear the form data
     setFormData({
-      firstname: formData.firstname,
-      factoryName: formData.factoryName,
-      contact: formData.contact,
-      cnic: formData.cnic,
+      firstname: "",
+      factoryName: "",
+      contact: "",
+      cnic: "",
       productName: "",
       measurementType: "",
       prodWidth: "",
@@ -177,17 +178,18 @@ const CreateBill = () => {
       edgepoolishrate: "",
       edgepoolishamount: "",
       subtotal: 0,
-
+  
       leatherpoolish: false,
       antiquePoolish: false,
       glossyPoolish: false,
       edgepoolishAntique: false,
       edgepoolishGlossy: false,
     });
-
+  
     setStep(2);
     console.log(updatedFormData); // You can replace this with your form submission logic
   };
+  
 
   const useback = () => {
     navigate("/admin-panel/users");
@@ -265,7 +267,7 @@ const CreateBill = () => {
     return isNaN(result) ? "" : result.toFixed(2);
   };
 
-  const calculateedgepoolish = ({
+  const calculateedgepoolish = ({ 
     prodLength,
     edgepoolishrate,
     prodQuantity,
@@ -871,6 +873,17 @@ const CreateBill = () => {
                       type="number"
                       placeholder="Enter Product Length"
                     />
+                    <label className="text-gray-500 mb-2 text-xs lg:text-base">
+                      Product Quantity
+                    </label>
+                    <input
+                      name="prodQuantity"
+                      value={formData.prodQuantity}
+                      onChange={handleInputChange}
+                      className="text-xs lg:text-base outline outline-gray-400 mb-2 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
+                      type="number"
+                      placeholder="Enter Product Quantity"
+                    />
 
                     {formData.measurementType === "squareFoot" && (
                       <>
@@ -901,17 +914,7 @@ const CreateBill = () => {
                       </>
                     )}
 
-                    <label className="text-gray-500 mb-2 text-xs lg:text-base">
-                      Product Quantity
-                    </label>
-                    <input
-                      name="prodQuantity"
-                      value={formData.prodQuantity}
-                      onChange={handleInputChange}
-                      className="text-xs lg:text-base outline outline-gray-400 mb-2 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
-                      type="number"
-                      placeholder="Enter Product Quantity"
-                    />
+                    
 
                     <label className="text-gray-500 mb-2 text-xs lg:text-base">
                       Product Thickness
@@ -1013,7 +1016,7 @@ const CreateBill = () => {
                           onChange={handleInputChange}
                           className="text-xs lg:text-base outline outline-gray-400 mb-2 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
                           type="number"
-                          placeholder="Running Foot"
+                          placeholder="Poolish Rate"
                         />
 
                         <label className="text-gray-500 mb-2 text-xs lg:text-base">

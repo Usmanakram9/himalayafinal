@@ -7,24 +7,7 @@ const createBill = async (req, res) => {
         factoryName,
         contactNum,
         cnic,
-        productName,
-        squareFoot,
-        runningFoot,
-        productWidth,
-        productLength,
-        calculatedSquareft,
-        calculatedRunningft,
-        productQuantity,
-        productThickness,
-        productRate,
-        topPolish,
-        topPolishRate,
-        topPolishCalculate,
-        topPolishAmount,
-        edgePolish,
-        edgePolishRate,
-        edgePolishAmount,
-        edgePolishCalculate,
+        formFields, // Updated to include form data fields as an array
         paidAmount,
         balance,
         totalAmount,
@@ -37,24 +20,7 @@ const createBill = async (req, res) => {
             factoryName,
             contactNum,
             cnic,
-            productName,
-            squareFoot,
-            runningFoot,
-            productWidth,
-            productLength,
-            calculatedSquareft,
-            calculatedRunningft,
-            productQuantity,
-            productThickness,
-            productRate,
-            topPolish,
-            topPolishRate,
-            topPolishCalculate,
-            topPolishAmount,
-            edgePolish,
-            edgePolishRate,
-            edgePolishAmount,
-            edgePolishCalculate,
+            formFields, // Set the array of form data fields
             paidAmount,
             balance,
             totalAmount,
@@ -92,28 +58,28 @@ const getSingleBill = async (req, res) => {
 };
 
 const updateBill = async (req, res) => {
-  const billId = req.params.id;
+    const billId = req.params.id;
 
-  try {
-      const bill = await Bill.findById(billId);
+    try {
+        const bill = await Bill.findById(billId);
 
-      if (bill) {
-          // Update the bill fields based on the provided request body
-          for (const key in req.body) {
-              if (req.body.hasOwnProperty(key) && bill[key] !== undefined) {
-                  bill[key] = req.body[key];
-              }
-          }
+        if (bill) {
+            // Update the bill fields based on the provided request body
+            for (const key in req.body) {
+                if (req.body.hasOwnProperty(key) && bill[key] !== undefined) {
+                    bill[key] = req.body[key];
+                }
+            }
 
-          const updatedBill = await bill.save();
-          res.status(200).json(updatedBill);
-      } else {
-          res.status(404).json({ message: 'Bill not found' });
-      }
-  } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
-  }
+            const updatedBill = await bill.save();
+            res.status(200).json(updatedBill);
+        } else {
+            res.status(404).json({ message: 'Bill not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 };
 
 const deleteBill = async (req, res) => {
