@@ -129,6 +129,7 @@ const BillVerification = () => {
     navigate("/admin-panel/");
   };
   const [allFormData, setAllFormData] = useState([]);
+  
   const [billDetails, setBillDetails] = useState({
     subtotalAmount: 0,
     paid: 0,
@@ -177,16 +178,16 @@ const BillVerification = () => {
       const paidAmount = Number(billDetails.paid);
 
       const newBill = {
-        // customerId: , // Replace with the actual customer ID
+        customerId: allFormData[0].customerId, // Replace with the actual customer ID
         customerName: allFormData[0].firstname, // Replace with the actual customer name
         factoryName: allFormData[0].factoryName, // Replace with the actual factory name
         contactNum: allFormData[0].contact, // Replace with the actual contact number
         cnic: allFormData[0].cnic, // Replace with the actual CNIC (numeric value)
         formFields: allFormData.map((formData) => ({
-          firstname: formData.firstname,
-          factoryName: formData.factoryName,
-          contact: formData.contact,
-          cnic: Number(formData.cnic), // Ensure cnic is a number
+          // firstname: formData.firstname,
+          // factoryName: formData.factoryName,
+          // contact: formData.contact,
+          // cnic: Number(formData.cnic), // Ensure cnic is a number
           // Add other form fields based on your formFieldSchema
           productName: formData.productName,
           measurementType: formData.measurementType,

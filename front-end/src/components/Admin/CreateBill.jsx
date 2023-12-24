@@ -139,6 +139,7 @@ const CreateBill = () => {
     const updatedFormData = {
       ...formData,
       id: nextCounter,
+      customerId:data._id,
       leatherpoolish: formData.leatherpoolish ? "Yes" : "No",
       antiquePoolish: formData.antiquePoolish ? "Yes" : "No",
       glossyPoolish: formData.glossyPoolish ? "Yes" : "No",
@@ -158,10 +159,12 @@ const CreateBill = () => {
 
     // Clear the form data
     setFormData({
-      firstname: "",
-      factoryName: "",
-      contact: "",
-      cnic: "",
+      customerId:data._id,
+      firstname: formData.firstname,
+      factoryName: formData.factoryName,
+      contact: formData.contact,
+      cnic: formData.cnic,
+     
       productName: "",
       measurementType: "",
       prodWidth: "",
@@ -209,6 +212,7 @@ const CreateBill = () => {
     const updatedFormData = {
       ...formData,
       id: nextCounter,
+      customerId:data._id,
       leatherpoolish: formData.leatherpoolish ? "Yes" : "No",
       antiquePoolish: formData.antiquePoolish ? "Yes" : "No",
       glossyPoolish: formData.glossyPoolish ? "Yes" : "No",
@@ -226,6 +230,7 @@ const CreateBill = () => {
 
     // Clear the form data
     setFormData({
+      
       firstname: formData.firstname,
       factoryName: formData.factoryName,
       contact: formData.contact,
