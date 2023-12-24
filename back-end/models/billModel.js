@@ -28,7 +28,7 @@ const formFieldSchema = new mongoose.Schema({
     glossyPoolish: Boolean,
     edgepoolishAntique: Boolean,
     edgepoolishGlossy: Boolean,
-});
+}); 
 
 const billSchema = new mongoose.Schema({
     customerId: {
@@ -38,28 +38,25 @@ const billSchema = new mongoose.Schema({
     },
     customerName: {
         type: String,
-        required: true,
+       
         trim: true,
-        minlength: 2,
-        maxlength: 100,
+      
     },
     factoryName: {
         type: String,
-        required: true,
+        
         trim: true,
-        minlength: 2,
-        maxlength: 100,
+         
     },
     contactNum: {
         type: String,  
-        required: true, 
+        
     },
     cnic: {
-        type: Number,
-        required: true,
+        type: String,
+        
         unique: false,
-        min: 1000000000000,
-        max: 9999999999999999999,
+      
     },
     formFields: [formFieldSchema], // Array of form data fields
     paidAmount: {

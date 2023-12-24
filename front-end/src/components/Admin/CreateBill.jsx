@@ -130,11 +130,11 @@ const CreateBill = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  
+
     // Increment a counter (you might want to store this in state or elsewhere)
     const counter = localStorage.getItem("counter") || 0;
     const nextCounter = parseInt(counter, 10) + 1;
-  
+
     // Add a unique identifier (id) to the form data
     const updatedFormData = {
       ...formData,
@@ -146,14 +146,16 @@ const CreateBill = () => {
       edgepoolishGlossy: formData.edgepoolishGlossy ? "Yes" : "No",
       // Add similar updates for other fields as needed
     };
-  
+
+    // Log the formData before saving
+
     // Save formData to local storage with a dynamic key
     const key = `formData${nextCounter}`;
     localStorage.setItem(key, JSON.stringify(updatedFormData));
-  
+
     // Update the counter in local storage
     localStorage.setItem("counter", nextCounter);
-  
+
     // Clear the form data
     setFormData({
       firstname: "",
@@ -178,18 +180,21 @@ const CreateBill = () => {
       edgepoolishrate: "",
       edgepoolishamount: "",
       subtotal: 0,
-  
+
       leatherpoolish: false,
       antiquePoolish: false,
       glossyPoolish: false,
       edgepoolishAntique: false,
       edgepoolishGlossy: false,
     });
-  
+
     setStep(2);
-    console.log(updatedFormData); // You can replace this with your form submission logic
+
+    // Log the formData after saving
+    // console.log("After saving to local storage:", updatedFormData);
+
+    // console.log(updatedFormData); // You can replace this with your form submission logic
   };
-  
 
   const useback = () => {
     navigate("/admin-panel/users");
@@ -203,6 +208,7 @@ const CreateBill = () => {
     // Update the values for checkboxes
     const updatedFormData = {
       ...formData,
+      id: nextCounter,
       leatherpoolish: formData.leatherpoolish ? "Yes" : "No",
       antiquePoolish: formData.antiquePoolish ? "Yes" : "No",
       glossyPoolish: formData.glossyPoolish ? "Yes" : "No",
@@ -267,7 +273,7 @@ const CreateBill = () => {
     return isNaN(result) ? "" : result.toFixed(2);
   };
 
-  const calculateedgepoolish = ({ 
+  const calculateedgepoolish = ({
     prodLength,
     edgepoolishrate,
     prodQuantity,
@@ -331,8 +337,16 @@ const CreateBill = () => {
 
   const handleCalculateTotal = () => {
     const prod = parseFloat(formData.prodamount) || 0;
-    const poolish = parseFloat(formData.poolishAmount) || 0;
-    const edge = parseFloat(formData.edgepoolishamount) || 0;
+    let poolish = 0;
+    let edge = 0;
+
+    if (formData.topPoolish) {
+      poolish = parseFloat(formData.poolishAmount) || 0;
+    }
+
+    if (formData.edgepoolish) {
+      edge = parseFloat(formData.edgepoolishamount) || 0;
+    }
 
     const subtotal = prod + poolish + edge;
 
@@ -344,6 +358,7 @@ const CreateBill = () => {
     console.log("Total:", subtotal);
     // You can update the state or perform any other actions with the total value
   };
+
   return (
     <>
       <button
@@ -913,8 +928,6 @@ const CreateBill = () => {
                         />
                       </>
                     )}
-
-                    
 
                     <label className="text-gray-500 mb-2 text-xs lg:text-base">
                       Product Thickness

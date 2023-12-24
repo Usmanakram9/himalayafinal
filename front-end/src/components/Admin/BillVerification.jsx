@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,7 @@ const FormDataBox = ({ formData, onDelete, onUpdate }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const handleViewDetail = () => {
-    setShowDetails(!showDetails);
+    setShowDetails((prev) => !prev);
   };
 
   return (
@@ -21,7 +21,6 @@ const FormDataBox = ({ formData, onDelete, onUpdate }) => {
           <span className="font-bold">Bill:</span> {formData.subtotal}
         </h3>
 
-        {/* Conditionally render additional fields when showDetails is true */}
         {showDetails && (
           <>
             <h3 className="text-xl mb-2">
@@ -29,94 +28,77 @@ const FormDataBox = ({ formData, onDelete, onUpdate }) => {
               {formData.factoryName}
             </h3>
             <h3 className="text-xl mb-2">
-              <span className="font-bold">Contact:</span> {formData.contact}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">CNIC:</span> {formData.cnic}
-            </h3>
+  <span className="font-bold">Contact:</span> {formData.contact}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">CNIC:</span> {formData.cnic}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Product Name:</span> {formData.productName}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Measurement Type:</span> {formData.measurementType}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Product Width:</span> {formData.prodWidth}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Product Length:</span> {formData.prodLength}
+</h3>
+<h3 className="text-xl mb-2">
+<span className="font-bold">
+{formData.measurementType === "squareFoot" ? "Square Foot:" : "Running Foot:"}
+</span>
+{formData.result}
+</h3>
 
-            {/* New Fields */}
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Product Name:</span>{" "}
-              {formData.productName}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Measurement Type:</span>{" "}
-              {formData.measurementType}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Product Width:</span>{" "}
-              {formData.prodWidth}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Product Length:</span>{" "}
-              {formData.prodLength}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Square Foot/Running Foot:</span>{" "}
-              {formData.result}
-            </h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Product Quantity:</span> {formData.prodQuantity}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Product Thickness:</span> {formData.prodThickness}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Product Rate:</span> {formData.prodRate}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Product Amount:</span> {formData.prodamount}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Top Poolish:</span> {formData.topPoolish ? "Yes" : "No"}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Result Poolish:</span> {formData.resultPoolish}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Poolish Amount:</span> {formData.poolishAmount}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Edge Poolish:</span> {formData.edgepoolish  ? "Yes" : "No"}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Edge Poolish Rate:</span> {formData.edgepoolishrate}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Edge Poolish Amount:</span> {formData.edgepoolishamount}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Leather Poolish:</span> {formData.leatherpoolish ? "Yes" : "No"}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Antique Poolish:</span> {formData.antiquePoolish ? "Yes" : "No"}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Glossy Poolish:</span> {formData.glossyPoolish ? "Yes" : "No"}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Edge Poolish Antique:</span> {formData.edgepoolishAntique ? "Yes" : "No"}
+</h3>
+<h3 className="text-xl mb-2">
+  <span className="font-bold">Edge Poolish Glossy:</span> {formData.edgepoolishGlossy ? "Yes" : "No"}
+</h3>
+{/* Add more fields as needed */}
 
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Product Quantity:</span>{" "}
-              {formData.prodQuantity}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Product Thickness:</span>{" "}
-              {formData.prodThickness}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Product Rate:</span>{" "}
-              {formData.prodRate}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Product Amount:</span>{" "}
-              {formData.prodamount}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Top Polish:</span>{" "}
-              {formData.topPoolish ? "Yes" : "No"}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Result Polish:</span>{" "}
-              {formData.resultPoolish}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Polish Amount:</span>{" "}
-              {formData.poolishAmount}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Edge Polish:</span>{" "}
-              {formData.edgepoolish}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Edge Polish Rate:</span>{" "}
-              {formData.edgepoolishrate}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Edge Polish Amount:</span>{" "}
-              {formData.edgepoolishamount}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Leather Polish:</span>{" "}
-              {formData.leatherpoolish ? "Yes" : "No"}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Antique Polish:</span>{" "}
-              {formData.antiquePoolish ? "Yes" : "No"}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Glossy Polish:</span>{" "}
-              {formData.glossyPoolish ? "Yes" : "No"}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Edge Polish Antique:</span>{" "}
-              {formData.edgepoolishAntique ? "Yes" : "No"}
-            </h3>
-            <h3 className="text-xl mb-2">
-              <span className="font-bold">Edge Polish Glossy:</span>{" "}
-              {formData.edgepoolishGlossy ? "Yes" : "No"}
-            </h3>
             {/* Add more fields as needed */}
           </>
         )}
@@ -141,7 +123,6 @@ const FormDataBox = ({ formData, onDelete, onUpdate }) => {
 };
 
 const BillVerification = () => {
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const billStore = useBillStore();
   const useback = () => {
@@ -150,64 +131,36 @@ const BillVerification = () => {
   const [allFormData, setAllFormData] = useState([]);
   const [billDetails, setBillDetails] = useState({
     subtotalAmount: 0,
-    paid: "",
+    paid: 0,
     balance: 0,
   });
+  const handleDelete = (id) => {
+    const updatedFormData = allFormData.filter(
+      (formData) => formData.id !== id
+    );
 
-  useEffect(() => {
-    const counter = localStorage.getItem("counter") || 0;
-    const keys = Array.from({ length: counter }, (_, i) => `formData${i + 1}`);
-    const formDataArray = keys.map((key) => JSON.parse(localStorage.getItem(key)));
-    const filteredFormDataArray = formDataArray.filter((data) => data);
-  
-    // Calculate the initial subtotal
-    const initialSubtotal = filteredFormDataArray.reduce(
+    // Remove the item from local storage
+    localStorage.removeItem(`formData${id}`);
+
+    setAllFormData(updatedFormData);
+
+    // Recalculate the subtotal after deleting the item
+    const newSubtotal = updatedFormData.reduce(
       (sum, formData) => sum + Number(formData.subtotal),
       0
     );
-  
-    setAllFormData(filteredFormDataArray);
-  
-    // Use a functional update to avoid the circular dependency issue
-    setBillDetails((prev) => {
-      const paidAmount = Number(prev.paid);
-      const balanceAmount = initialSubtotal - paidAmount;
-  
-      return {
-        ...prev,
-        subtotalAmount: initialSubtotal,
-        balance: balanceAmount,
-      };
-    });
-  }, [allFormData, billDetails.paid]);
-  
-  
-  const handleDelete = (index) => {
-    // Check if the index is within the valid range
-    if (index >= 0 && index < allFormData.length) {
-      // Remove the corresponding form data from local storage
-      const key = `formData${index + 1}`;
-      localStorage.removeItem(key);
-  
-      // Update the counter in local storage (if needed)
-      localStorage.setItem("counter", localStorage.getItem("counter") - 1);
-  
-      // Update the state to reflect the change
-      setAllFormData((prevData) => {
-        // Create a new array without the deleted item
-        const updatedData = [...prevData.slice(0, index), ...prevData.slice(index + 1)];
-        return updatedData;
-      });
-    }
-  };
-  
-  
-  
 
-  const handleUpdate = (index) => {
+    setBillDetails((prev) => ({
+      ...prev,
+      subtotalAmount: newSubtotal,
+      balance: newSubtotal - Number(prev.paid),
+    }));
+  };
+
+  const handleUpdate = useCallback((index) => {
     // Implement your logic for handling the update here
     // You can navigate to another page or show a modal, for example
-  };
+  }, []);
 
   const handleCreateBill = async () => {
     try {
@@ -219,80 +172,93 @@ const BillVerification = () => {
           allFormData.push(formData);
         }
       }
-  
+
       const subtotalAmount = Number(billDetails.subtotalAmount);
       const paidAmount = Number(billDetails.paid);
-  
+
       const newBill = {
         // customerId: , // Replace with the actual customer ID
         customerName: allFormData[0].firstname, // Replace with the actual customer name
         factoryName: allFormData[0].factoryName, // Replace with the actual factory name
         contactNum: allFormData[0].contact, // Replace with the actual contact number
-        cnic:allFormData[0].cnic, // Replace with the actual CNIC (numeric value)
-        formFields: allFormData.map(formData => ({
+        cnic: allFormData[0].cnic, // Replace with the actual CNIC (numeric value)
+        formFields: allFormData.map((formData) => ({
           firstname: formData.firstname,
           factoryName: formData.factoryName,
           contact: formData.contact,
           cnic: Number(formData.cnic), // Ensure cnic is a number
           // Add other form fields based on your formFieldSchema
           productName: formData.productName,
-    measurementType: formData.measurementType,
-    prodWidth: formData.prodWidth,
-    prodLength: formData.prodLength,
-    result: formData.result,
-    prodQuantity: formData.prodQuantity,
-    prodThickness: formData.prodThickness,
-    prodRate: formData.prodRate,
-    prodamount: formData.prodamount,
-    topPoolish: formData.topPoolish === "Yes",  
-    resultPoolish: formData.resultPoolish,
-    poolishAmount: formData.poolishAmount,
-    edgepoolish: formData.edgepoolish,
-    edgepoolishrate: formData.edgepoolishrate,
-    edgepoolishamount: formData.edgepoolishamount,
-    leatherpoolish: formData.leatherpoolish === "Yes",  // Convert to boolean
-    antiquePoolish: formData.antiquePoolish === "Yes",  // Convert to boolean
-    glossyPoolish: formData.glossyPoolish === "Yes",  // Convert to boolean
-    edgepoolishAntique: formData.edgepoolishAntique === "Yes",  // Convert to boolean
-    edgepoolishGlossy: formData.edgepoolishGlossy === "Yes",  // Convert to boolean
+          measurementType: formData.measurementType,
+          prodWidth: formData.prodWidth,
+          prodLength: formData.prodLength,
+          result: formData.result,
+          prodQuantity: formData.prodQuantity,
+          prodThickness: formData.prodThickness,
+          prodRate: formData.prodRate,
+          prodamount: formData.prodamount,
+          topPoolish: formData.topPoolish === "Yes",
+          resultPoolish: formData.resultPoolish,
+          poolishAmount: formData.poolishAmount,
+          edgepoolish: formData.edgepoolish,
+          edgepoolishrate: formData.edgepoolishrate,
+          edgepoolishamount: formData.edgepoolishamount,
+          leatherpoolish: formData.leatherpoolish === "Yes", // Convert to boolean
+          antiquePoolish: formData.antiquePoolish === "Yes", // Convert to boolean
+          glossyPoolish: formData.glossyPoolish === "Yes", // Convert to boolean
+          edgepoolishAntique: formData.edgepoolishAntique === "Yes", // Convert to boolean
+          edgepoolishGlossy: formData.edgepoolishGlossy === "Yes", // Convert to boolean
           // ...
         })),
         paidAmount: paidAmount,
         balance: billDetails.balance,
         totalAmount: subtotalAmount,
       };
-  
-      // Call the createBill action from the Zustand store
+
       await billStore.createBill(newBill);
-  
-      // After creating the bill, you might want to reset the forms or perform other actions
-      // Reset the form data, navigate to another page, etc.
-  
-      // Optional: Reset the local storage and navigate to another page
-      // localStorage.clear();
-      // navigate("/success-page"); // Replace with the actual success page path
-  
     } catch (error) {
-      console.error('Error creating bill:', error);
-      // Optionally, you can set an error state in your component if needed
+      console.error("Error creating bill:", error);
     }
   };
 
-  
+  useEffect(() => {
+    // Recalculate balance after updating paid amount
+    const balanceAmount = billDetails.subtotalAmount - Number(billDetails.paid);
+    setBillDetails((prev) => ({
+      ...prev,
+      balance: balanceAmount,
+    }));
+  }, [billDetails.subtotalAmount, billDetails.paid, setBillDetails]);
 
   const handlePaidChange = (e) => {
     const paidAmount = Number(e.target.value);
-
-    // Calculate balance when "Paid" changes
-    const balanceAmount = billDetails.subtotalAmount - paidAmount;
-
-    // Update the state with the calculated values
     setBillDetails((prev) => ({
       ...prev,
-      paid: e.target.value,
-      balance: balanceAmount,
+      paid: isNaN(paidAmount) ? 0 : paidAmount,
     }));
   };
+
+  useEffect(() => {
+    const counter = localStorage.getItem("counter") || 0;
+    const keys = Array.from({ length: counter }, (_, i) => `formData${i + 1}`);
+    const formDataArray = keys.map((key) =>
+      JSON.parse(localStorage.getItem(key))
+    );
+    const filteredFormDataArray = formDataArray.filter((data) => data);
+
+    const initialSubtotal = filteredFormDataArray.reduce(
+      (sum, formData) => sum + Number(formData.subtotal),
+      0
+    );
+
+    setAllFormData(filteredFormDataArray);
+
+    setBillDetails((prevBillDetails) => ({
+      ...prevBillDetails,
+      subtotalAmount: initialSubtotal,
+      balance: initialSubtotal - Number(prevBillDetails.paid),
+    }));
+  }, [billDetails.paid]);
 
   return (
     <>
@@ -309,7 +275,7 @@ const BillVerification = () => {
             <div key={index} className="mb-4">
               <FormDataBox
                 formData={formData}
-                onDelete={() => handleDelete(index)}
+                onDelete={() => handleDelete(formData.id)}
                 onUpdate={() => handleUpdate(index)}
               />
             </div>
@@ -355,11 +321,11 @@ const BillVerification = () => {
           </div>
 
           <button
-        className="bg-white dark:bg-[#0F172A] ml-2 mt-2 text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
-        onClick={handleCreateBill}
-      >
-        Create Bill 
-      </button>
+            className="bg-white dark:bg-[#0F172A] ml-2 mt-2 text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
+            onClick={handleCreateBill}
+          >
+            Create Bill
+          </button>
         </div>
       </div>
     </>
