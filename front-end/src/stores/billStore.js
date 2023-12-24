@@ -1,7 +1,7 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import axios from 'axios';
 
-const useBillStore = create((set) => ({
+export const useBillStore = create((set) => ({
   bills: [],
   singleBill: null,
   error: null,
@@ -71,5 +71,3 @@ const useBillStore = create((set) => ({
     }
   },
 }));
-
-export default useBillStore;

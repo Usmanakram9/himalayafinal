@@ -74,7 +74,7 @@ const UsersList = () => {
             {Array.isArray(data) && data.length > 0 ? (
               data.map((user) => (
                 <div
-                  key={user.id}
+                  key={user._id}
                   className=" bg-opacity-10 bg-black overflow-hidden shadow-md rounded-lg transition transform hover:scale-105"
                 >
                   <div className="p-4">

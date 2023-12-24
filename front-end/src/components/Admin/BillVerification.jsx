@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import useBillStore from "../../stores/billStore";
+import { useBillStore } from "../../stores/billStore";
 
 const FormDataBox = ({ formData, onDelete, onUpdate }) => {
   const [showDetails, setShowDetails] = useState(false);

@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useSignupStore from "../../stores/signupStore";
+import {
+  calculatePoolish,
+  calculateEdgePoolish,
+  calculateResult,
+  calculateProductAmount,
+  calculateTotal
+} from "./Utils/formUtils";
 
 const CreateBill = () => {
   const navigate = useNavigate();
@@ -61,7 +68,6 @@ const CreateBill = () => {
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    // Handle exclusive selection for the three checkboxes in "poolishType"
     if (
       type === "checkbox" &&
       ["leatherpoolish", "antiquePoolish", "glossyPoolish"].includes(name)
@@ -71,12 +77,8 @@ const CreateBill = () => {
         leatherpoolish: name === "leatherpoolish" ? checked : false,
         antiquePoolish: name === "antiquePoolish" ? checked : false,
         glossyPoolish: name === "glossyPoolish" ? checked : false,
-        // Add other state updates as needed
       }));
-    }
-
-    // Handle exclusive selection for the two checkboxes in "ePoolishType"
-    else if (
+    } else if (
       type === "checkbox" &&
       ["edgepoolishAntique", "edgepoolishGlossy"].includes(name)
     ) {
@@ -84,12 +86,8 @@ const CreateBill = () => {
         ...prevData,
         edgepoolishAntique: name === "edgepoolishAntique" ? checked : false,
         edgepoolishGlossy: name === "edgepoolishGlossy" ? checked : false,
-        // Add other state updates as needed
       }));
-    }
-
-    // Handle other input types
-    else {
+    } else {
       setFormData((prevData) => {
         const updatedData = {
           ...prevData,
@@ -111,13 +109,13 @@ const CreateBill = () => {
             name === "prodLength" ||
             name === "edgepoolishrate" ||
             name === "prodQuantity"
-              ? calculateedgepoolish({ ...prevData, [name]: value })
+              ? calculateEdgePoolish({ ...prevData, [name]: value })
               : prevData.edgepoolishamount,
           prodamount:
             name === "measurementType" ||
             name === "prodRate" ||
             name === "result"
-              ? calculateproductAmount({ ...prevData, [name]: value })
+              ? calculateProductAmount({ ...prevData, [name]: value })
               : name === "prodamount"
               ? value
               : prevData.prodamount,
@@ -139,7 +137,7 @@ const CreateBill = () => {
     const updatedFormData = {
       ...formData,
       id: nextCounter,
-      customerId:data._id,
+      customerId: data._id,
       leatherpoolish: formData.leatherpoolish ? "Yes" : "No",
       antiquePoolish: formData.antiquePoolish ? "Yes" : "No",
       glossyPoolish: formData.glossyPoolish ? "Yes" : "No",
@@ -159,12 +157,12 @@ const CreateBill = () => {
 
     // Clear the form data
     setFormData({
-      customerId:data._id,
+      customerId: data._id,
       firstname: formData.firstname,
       factoryName: formData.factoryName,
       contact: formData.contact,
       cnic: formData.cnic,
-     
+
       productName: "",
       measurementType: "",
       prodWidth: "",
@@ -212,7 +210,7 @@ const CreateBill = () => {
     const updatedFormData = {
       ...formData,
       id: nextCounter,
-      customerId:data._id,
+      customerId: data._id,
       leatherpoolish: formData.leatherpoolish ? "Yes" : "No",
       antiquePoolish: formData.antiquePoolish ? "Yes" : "No",
       glossyPoolish: formData.glossyPoolish ? "Yes" : "No",
@@ -230,7 +228,6 @@ const CreateBill = () => {
 
     // Clear the form data
     setFormData({
-      
       firstname: formData.firstname,
       factoryName: formData.factoryName,
       contact: formData.contact,
@@ -265,103 +262,9 @@ const CreateBill = () => {
     navigate("/admin-panel/verification");
   };
 
-  const calculatePoolish = ({ prodWidth, prodLength, resultPoolish }) => {
-    const width = parseFloat(prodWidth);
-    const length = parseFloat(prodLength);
-    const resultpol = parseFloat(resultPoolish);
-    if (isNaN(width) || isNaN(length) || isNaN(resultpol)) {
-      // Handle invalid input
-      return "";
-    }
-
-    const result = ((width * length) / 144) * resultpol; // Adjust this formula as needed
-    return isNaN(result) ? "" : result.toFixed(2);
-  };
-
-  const calculateedgepoolish = ({
-    prodLength,
-    edgepoolishrate,
-    prodQuantity,
-  }) => {
-    const length = parseFloat(prodLength);
-    const edgerate = parseFloat(edgepoolishrate);
-    const quant = parseFloat(prodQuantity);
-
-    if (isNaN(length) || isNaN(edgerate) || isNaN(quant)) {
-      return "";
-    }
-
-    const result = (length / 12) * edgerate * quant;
-    return isNaN(result) ? "" : result.toFixed(2);
-  };
-  const calculateResult = ({
-    prodWidth,
-    prodLength,
-    measurementType,
-    prodQuantity,
-  }) => {
-    const width = parseFloat(prodWidth);
-    const length = parseFloat(prodLength);
-    const quant = parseFloat(prodQuantity);
-
-    if (isNaN(width) || isNaN(length) || isNaN(quant)) {
-      // Handle invalid input
-      return "";
-    }
-
-    // Add your formulas for Square Foot and Running Foot
-    if (measurementType === "squareFoot") {
-      const result = (width * length * quant) / 144; // Adjust this formula as needed
-      return isNaN(result) ? "" : result.toFixed(2);
-    } else if (measurementType === "runningFoot") {
-      const result = (length / 12) * quant; // Adjust this formula as needed
-      return isNaN(result) ? "" : result.toFixed(2);
-    }
-
-    return "";
-  };
-
-  const calculateproductAmount = ({ measurementType, prodRate, result }) => {
-    const prodrate = parseFloat(prodRate);
-    const sqt = parseFloat(result);
-
-    if (isNaN(prodrate) || isNaN(sqt)) {
-      return "";
-    }
-
-    if (measurementType === "squareFoot") {
-      const result = prodrate * sqt;
-      return isNaN(result) ? "" : parseInt(result, 10);
-    } else if (measurementType === "runningFoot") {
-      const result = prodrate * sqt;
-      return isNaN(result) ? "" : parseInt(result, 10);
-    }
-
-    return "";
-  };
-
   const handleCalculateTotal = () => {
-    const prod = parseFloat(formData.prodamount) || 0;
-    let poolish = 0;
-    let edge = 0;
-
-    if (formData.topPoolish) {
-      poolish = parseFloat(formData.poolishAmount) || 0;
-    }
-
-    if (formData.edgepoolish) {
-      edge = parseFloat(formData.edgepoolishamount) || 0;
-    }
-
-    const subtotal = prod + poolish + edge;
-
-    setFormData((prevData) => ({
-      ...prevData,
-      subtotal: isNaN(subtotal) ? "" : parseInt(subtotal, 10),
-    }));
-
-    console.log("Total:", subtotal);
-    // You can update the state or perform any other actions with the total value
+    const total = calculateTotal(formData);
+    setFormData((prevData) => ({ ...prevData, subtotal: total }));
   };
 
   return (
@@ -784,7 +687,7 @@ const CreateBill = () => {
                       <input
                         name="firstName"
                         value={data.firstname}
-                        onChange={handleInputChange}
+                       
                         className="text-xs lg:text-base mb-4 outline outline-gray-400 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
                         type="text"
                         placeholder="First Name"
@@ -797,7 +700,7 @@ const CreateBill = () => {
                     <input
                       name="factoryname"
                       value={data.factoryname}
-                      onChange={handleInputChange}
+                      
                       className="text-xs lg:text-base mb-4 outline outline-gray-400 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
                       type="text"
                       placeholder="Enter Factory Name"
@@ -809,7 +712,7 @@ const CreateBill = () => {
                     <input
                       name="contact"
                       value={data.contact}
-                      onChange={handleInputChange}
+                     
                       className="text-xs lg:text-base outline mb-4 outline-gray-400 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
                       type="text"
                       placeholder="Enter phone Number"
@@ -820,7 +723,7 @@ const CreateBill = () => {
                     <input
                       name="cnic"
                       value={data.cnic}
-                      onChange={handleInputChange}
+                      
                       className="text-xs lg:text-base outline outline-gray-400 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
                       type="text"
                       placeholder="Enter phone Number"
