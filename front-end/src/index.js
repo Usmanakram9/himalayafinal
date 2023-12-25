@@ -16,6 +16,7 @@ import ProductDetailsScreen from './screens/ProductDetailsScreen';
 import CreateBill from './components/Admin/CreateBill';
 import Test from './components/Test';
 import BillVerification from './components/Admin/BillVerification';
+import InvoiceHub from './components/Admin/InvoiceHub';
 
 let isAdmin = false;
 
@@ -36,6 +37,7 @@ const router = (
       <Route path="/admin-panel/addcustomer" element={<AddCustomer />} />
       <Route path="/admin-panel/createBill/:id" element={<CreateBill />} />
       <Route path="/admin-panel/verification" element={<BillVerification />} />
+      <Route path="/admin-panel/InvoiceHub/:id" element={<InvoiceHub />} />
       <Route path="/test" element={<Test />} />
     
     </Routes>

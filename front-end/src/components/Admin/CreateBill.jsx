@@ -20,7 +20,6 @@ const CreateBill = () => {
 
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    
     productName: "",
     measurementType: "",
     prodWidth: "",
@@ -134,9 +133,9 @@ const CreateBill = () => {
     const updatedFormData = {
       ...formData,
       id: nextCounter,
-        customerId: data._id,
-       firstname: data.firstname,
-      factoryName: data.factoryName,
+      customerId: data._id,
+      firstname: data.firstname,
+      factoryname: data.factoryname,
       contact: data.contact,
       cnic: data.cnic,
       leatherpoolish: formData.leatherpoolish ? "Yes" : "No",
@@ -147,9 +146,6 @@ const CreateBill = () => {
       // Add similar updates for other fields as needed
     };
 
-    // Log the formData before saving
-
-    // Save formData to local storage with a dynamic key
     const key = `formData${nextCounter}`;
     localStorage.setItem(key, JSON.stringify(updatedFormData));
 
@@ -184,11 +180,6 @@ const CreateBill = () => {
     });
 
     setStep(2);
-
-    // Log the formData after saving
-     console.log("After saving to local storage:", updatedFormData);
-
-    // console.log(updatedFormData); // You can replace this with your form submission logic
   };
 
   const useback = () => {
@@ -205,8 +196,8 @@ const CreateBill = () => {
       ...formData,
       id: nextCounter,
       customerId: data._id,
-       firstname: data.firstname,
-      factoryName: data.factoryName,
+      firstname: data.firstname,
+      factoryname: data.factoryname,
       contact: data.contact,
       cnic: data.cnic,
       leatherpoolish: formData.leatherpoolish ? "Yes" : "No",
@@ -226,7 +217,6 @@ const CreateBill = () => {
 
     // Clear the form data
     setFormData({
-     
       productName: "",
       measurementType: "",
       prodWidth: "",
@@ -245,7 +235,6 @@ const CreateBill = () => {
       edgepoolishrate: "",
       edgepoolishamount: "",
       subtotal: 0,
-
       leatherpoolish: false,
       antiquePoolish: false,
       glossyPoolish: false,
@@ -254,7 +243,7 @@ const CreateBill = () => {
     });
 
     // Navigate to the next page
-    console.log("After saving to local storage:", updatedFormData);
+
     navigate("/admin-panel/verification");
   };
 
@@ -670,46 +659,45 @@ const CreateBill = () => {
 
         <div className="w-full md:w-1/2 lg:w-full p-4">
           <div className="shadow-lg border border-2 rounded-lg rounded-md p-4">
-           {step === 1 && (
-  <>
-    {/* Step 1: First Name, Last Name, Email */}
-    <div className="flex flex-col">
-      <label className="text-gray-500 mb-1 text-xs lg:text-base">
-        First Name
-      </label>
-      {data && (
-        <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
-          {data.firstname}
-        </p>
-      )}
+            {step === 1 && (
+              <>
+                {/* Step 1: First Name, Last Name, Email */}
+                <div className="flex flex-col">
+                  <label className="text-gray-500 mb-1 text-xs lg:text-base">
+                    First Name
+                  </label>
+                  {data && (
+                    <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
+                      {data.firstname}
+                    </p>
+                  )}
 
-      <label className="text-gray-500 mb-1 text-xs lg:text-base">
-        Factory Name
-      </label>
-      <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
-        {data.factoryName}
-      </p>
+                  <label className="text-gray-500 mb-1 text-xs lg:text-base">
+                    Factory Name
+                  </label>
+                  <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
+                    {data.factoryname}
+                  </p>
 
-      <label className="text-gray-500 mb-1 text-xs lg:text-base">
-        Contact
-      </label>
-      <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
-        {data.contact}
-      </p>
+                  <label className="text-gray-500 mb-1 text-xs lg:text-base">
+                    Contact
+                  </label>
+                  <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
+                    {data.contact}
+                  </p>
 
-      <label className="text-gray-500 mb-1 text-xs lg:text-base">
-        CNIC
-      </label>
-      <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
-        {data.cnic}
-      </p>
-    </div>
-  </>
-)}
+                  <label className="text-gray-500 mb-1 text-xs lg:text-base">
+                    CNIC
+                  </label>
+                  <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
+                    {data.cnic}
+                  </p>
+                </div>
+              </>
+            )}
 
             <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
               {/* Render form elements based on the current step */}
-             
 
               {step === 2 && (
                 <>

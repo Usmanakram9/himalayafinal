@@ -217,6 +217,8 @@ const BillVerification = () => {
       };
 
       await billStore.createBill(newBill);
+      localStorage.clear();
+      navigate(`/admin-panel/InvoiceHub/${allFormData[0].customerId}`);
     } catch (error) {
       console.error("Error creating bill:", error);
     }

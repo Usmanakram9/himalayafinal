@@ -97,4 +97,16 @@ const deleteBill = async (req, res) => {
     }
 };
 
-export { createBill, getBills, getSingleBill, updateBill, deleteBill };
+const getBillsByCustomerId = async (req, res) => {
+    const { customerId } = req.params;
+
+    try {
+        const bills = await Bill.find({ customerId });
+        res.status(200).json(bills);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+
+export { createBill, getBills, getSingleBill, updateBill, getBillsByCustomerId,deleteBill };
