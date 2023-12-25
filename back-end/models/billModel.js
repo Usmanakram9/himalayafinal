@@ -49,13 +49,11 @@ const billSchema = new mongoose.Schema(
       type: String,
     },
     cnic: {
-      type: String,
-
-      unique: false,
+      type: Number,
     },
     formFields: [formFieldSchema], // Array of form data fields
     paidAmount: {
-      type: Number,
+      type: Number, 
       required: true,
       min: 0,
     },

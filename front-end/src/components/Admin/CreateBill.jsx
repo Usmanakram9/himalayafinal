@@ -6,7 +6,7 @@ import {
   calculateEdgePoolish,
   calculateResult,
   calculateProductAmount,
-  calculateTotal
+  calculateTotal,
 } from "./Utils/formUtils";
 
 const CreateBill = () => {
@@ -20,10 +20,7 @@ const CreateBill = () => {
 
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    firstname: data && data.firstname ? data.firstname : "",
-    factoryName: data && data.factoryname ? data.factoryname : "",
-    contact: data && data.contact ? data.contact : "",
-    cnic: data && data.cnic ? data.cnic : "",
+    
     productName: "",
     measurementType: "",
     prodWidth: "",
@@ -137,7 +134,11 @@ const CreateBill = () => {
     const updatedFormData = {
       ...formData,
       id: nextCounter,
-      customerId: data._id,
+        customerId: data._id,
+       firstname: data.firstname,
+      factoryName: data.factoryName,
+      contact: data.contact,
+      cnic: data.cnic,
       leatherpoolish: formData.leatherpoolish ? "Yes" : "No",
       antiquePoolish: formData.antiquePoolish ? "Yes" : "No",
       glossyPoolish: formData.glossyPoolish ? "Yes" : "No",
@@ -157,12 +158,6 @@ const CreateBill = () => {
 
     // Clear the form data
     setFormData({
-      customerId: data._id,
-      firstname: formData.firstname,
-      factoryName: formData.factoryName,
-      contact: formData.contact,
-      cnic: formData.cnic,
-
       productName: "",
       measurementType: "",
       prodWidth: "",
@@ -174,14 +169,13 @@ const CreateBill = () => {
       prodThickness: "",
       prodRate: "",
       prodamount: "",
-      topPoolish: false,
+      topPoolish: "",
       resultPoolish: "",
       poolishAmount: "",
       edgepoolish: "",
       edgepoolishrate: "",
       edgepoolishamount: "",
       subtotal: 0,
-
       leatherpoolish: false,
       antiquePoolish: false,
       glossyPoolish: false,
@@ -192,7 +186,7 @@ const CreateBill = () => {
     setStep(2);
 
     // Log the formData after saving
-    // console.log("After saving to local storage:", updatedFormData);
+     console.log("After saving to local storage:", updatedFormData);
 
     // console.log(updatedFormData); // You can replace this with your form submission logic
   };
@@ -211,6 +205,10 @@ const CreateBill = () => {
       ...formData,
       id: nextCounter,
       customerId: data._id,
+       firstname: data.firstname,
+      factoryName: data.factoryName,
+      contact: data.contact,
+      cnic: data.cnic,
       leatherpoolish: formData.leatherpoolish ? "Yes" : "No",
       antiquePoolish: formData.antiquePoolish ? "Yes" : "No",
       glossyPoolish: formData.glossyPoolish ? "Yes" : "No",
@@ -228,10 +226,7 @@ const CreateBill = () => {
 
     // Clear the form data
     setFormData({
-      firstname: formData.firstname,
-      factoryName: formData.factoryName,
-      contact: formData.contact,
-      cnic: formData.cnic,
+     
       productName: "",
       measurementType: "",
       prodWidth: "",
@@ -243,7 +238,7 @@ const CreateBill = () => {
       prodThickness: "",
       prodRate: "",
       prodamount: "",
-      topPoolish: false,
+      topPoolish: "",
       resultPoolish: "",
       poolishAmount: "",
       edgepoolish: "",
@@ -259,6 +254,7 @@ const CreateBill = () => {
     });
 
     // Navigate to the next page
+    console.log("After saving to local storage:", updatedFormData);
     navigate("/admin-panel/verification");
   };
 
@@ -674,63 +670,46 @@ const CreateBill = () => {
 
         <div className="w-full md:w-1/2 lg:w-full p-4">
           <div className="shadow-lg border border-2 rounded-lg rounded-md p-4">
+           {step === 1 && (
+  <>
+    {/* Step 1: First Name, Last Name, Email */}
+    <div className="flex flex-col">
+      <label className="text-gray-500 mb-1 text-xs lg:text-base">
+        First Name
+      </label>
+      {data && (
+        <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
+          {data.firstname}
+        </p>
+      )}
+
+      <label className="text-gray-500 mb-1 text-xs lg:text-base">
+        Factory Name
+      </label>
+      <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
+        {data.factoryName}
+      </p>
+
+      <label className="text-gray-500 mb-1 text-xs lg:text-base">
+        Contact
+      </label>
+      <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
+        {data.contact}
+      </p>
+
+      <label className="text-gray-500 mb-1 text-xs lg:text-base">
+        CNIC
+      </label>
+      <p className="text-xs lg:text-base mb-4 text-white dark:text-black">
+        {data.cnic}
+      </p>
+    </div>
+  </>
+)}
+
             <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
               {/* Render form elements based on the current step */}
-              {step === 1 && (
-                <>
-                  {/* Step 1: First Name, Last Name, Email */}
-                  <div className="flex flex-col">
-                    <label className="text-gray-500 mb-1 text-xs lg:text-base">
-                      First Name
-                    </label>
-                    {data && (
-                      <input
-                        name="firstName"
-                        value={data.firstname}
-                       
-                        className="text-xs lg:text-base mb-4 outline outline-gray-400 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
-                        type="text"
-                        placeholder="First Name"
-                      />
-                    )}
-
-                    <label className="text-gray-500 mb-1 text-xs lg:text-base">
-                      Factory Name
-                    </label>
-                    <input
-                      name="factoryname"
-                      value={data.factoryname}
-                      
-                      className="text-xs lg:text-base mb-4 outline outline-gray-400 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
-                      type="text"
-                      placeholder="Enter Factory Name"
-                    />
-
-                    <label className="text-gray-500 mb-1 text-xs lg:text-base">
-                      Contact
-                    </label>
-                    <input
-                      name="contact"
-                      value={data.contact}
-                     
-                      className="text-xs lg:text-base outline mb-4 outline-gray-400 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
-                      type="text"
-                      placeholder="Enter phone Number"
-                    />
-                    <label className="text-gray-500 mb-1 text-xs lg:text-base">
-                      CNIC
-                    </label>
-                    <input
-                      name="cnic"
-                      value={data.cnic}
-                      
-                      className="text-xs lg:text-base outline outline-gray-400 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
-                      type="text"
-                      placeholder="Enter phone Number"
-                    />
-                  </div>
-                </>
-              )}
+             
 
               {step === 2 && (
                 <>
