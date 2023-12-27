@@ -992,19 +992,19 @@ const CreateBill = () => {
                   <button
                     type="button"
                     onClick={handleCalculateTotal}
-                    className="bg-white dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
+                    className="bg-white text-xs lg:text-base dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
                   >
                     Calculate Total
                   </button>
                   <div className="flex flex-col mb-4">
-                    <label className="text-gray-500 mb-2 text-xs lg:text-base">
+                    <label className="text-gray-500 text-xs lg:text-base mb-2 text-xs lg:text-base">
                       Sub Total
                     </label>
                     <input
                       name="subtotal"
                       value={formData.subtotal}
                       onChange={handleInputChange}
-                      className="text-xs lg:text-base outline outline-gray-400 mb-2 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
+                      className="text-xs text-xs lg:text-base lg:text-base outline outline-gray-400 mb-2 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
                       type="text"
                       placeholder="Sub Total"
                     />
@@ -1018,7 +1018,7 @@ const CreateBill = () => {
                   <button
                     type="button"
                     onClick={handlePrevious}
-                    className="bg-white dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
+                    className="bg-white text-xs lg:text-base dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
                   >
                     Previous
                   </button>
@@ -1027,7 +1027,7 @@ const CreateBill = () => {
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="bg-white dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
+                    className="bg-white text-xs lg:text-base dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
                   >
                     Next
                   </button>
@@ -1036,14 +1036,14 @@ const CreateBill = () => {
                   <>
                     <button
                       type="submit"
-                      className="bg-white dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
+                      className="bg-white text-xs lg:text-base dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
                     >
                       Save & Add more
                     </button>
 
                     <button
                       type="submit"
-                      className="bg-white dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
+                      className="bg-white text-xs lg:text-base dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
                       onClick={handleNextPage}
                     >
                       Continue to create
