@@ -14,11 +14,11 @@
   margin-top: -10px;
   height: 105%;
   margin-left: -15px;
-  background-image: url('../images/bg4.jpg');
+  background-image: url('../images/bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  filter: blur(10px);
+  /* filter: blur(10px); */
   z-index: -1;
 }
 

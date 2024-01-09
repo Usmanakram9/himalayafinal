@@ -80,4 +80,21 @@ export const useBillStore = create((set) => ({
       set({ error, isLoading: false });
     }
   },
+
+  getFormFieldById: async (billId, formFieldId) => {
+    try {
+      set({ isLoading: true, error: null });
+      const response = await axios.get(`http://localhost:8000/api/bill/${billId}/singleBill/${formFieldId}`);
+      
+      // Assuming the API returns the form field directly
+      const formField = response.data;
+
+      set({ singleFormField: formField, isLoading: false });
+    } catch (error) {
+      console.error('Error fetching single form field:', error);
+      set({ error, isLoading: false });
+    }
+  },
 }));
+
+

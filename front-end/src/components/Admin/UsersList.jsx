@@ -3,9 +3,10 @@ import useSignupStore from "../../stores/signupStore";
 import AdminNavBar from "./AdminNavbar";
 import AdminFooter from "./AdminFooter";
 import "../../assets/css/UserList.css";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 const UsersList = () => {
+  const navigate = useNavigate();
   const {
     singleUser,
     data,
@@ -45,6 +46,10 @@ const UsersList = () => {
     await getUserById(userId);
     setEditedUser(singleUser);
   };
+  
+  const handleBill = async (userId)=>{
+    navigate(`/admin-panel/InvoiceHub/${userId}`);
+  };
 
   const handleChange = (e) => {
     // Update the state when the user changes input values
@@ -62,9 +67,16 @@ const UsersList = () => {
     getUsers();
   };
 
+  const useback = () => {
+    navigate("/admin-panel/");
+  };
+
   return (
     <>
       <AdminNavBar />
+      <button className="text-blue-500 text-sm mb-4 ml-4 mt-4" onClick={useback}>
+          &larr; Back
+        </button>
       <div className="userList flex flex-col items-center justify-center h-full">
         <div className="container mx-auto">
           <h1 className="text-3xl sm:text-4xl text-center font-bold mb-8">
@@ -87,6 +99,12 @@ const UsersList = () => {
                       <p>Contact Number: {user.contact}</p>
                       <p>CNIC: {user.cnic}</p>
                     </div>
+                    <button
+                      onClick={() => handleBill(user._id)}
+                      className="text-xs sm:text-sm text-red-600 hover:underline"
+                    >
+                      View Bill
+                    </button>
                   </div>
                   <div className="flex justify-between items-center px-4 py-2 bg-gray-100">
                     <button
@@ -107,6 +125,7 @@ const UsersList = () => {
                     >
                       Delete
                     </button>
+                    
                   </div>
                 </div>
               ))

@@ -42,7 +42,7 @@ const getsubproducts = async (req, res) => {
   }
 };
 
-
+ 
 const getsubProductById = async (req, res) =>{
 
     const subproductbyId = await SubProd.findById(req.params.id);

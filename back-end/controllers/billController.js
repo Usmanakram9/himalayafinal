@@ -109,4 +109,31 @@ const getBillsByCustomerId = async (req, res) => {
     }
 };
 
-export { createBill, getBills, getSingleBill, updateBill, getBillsByCustomerId,deleteBill };
+// new updating trying
+const getFormFieldById = async (req, res) => {
+    const { billId, formFieldId } = req.params;
+
+    try {
+        // Find the bill based on the billId
+        const bill = await Bill.findById(billId);
+
+        if (bill) {
+            // Find the specific form field within the bill
+            const formField = bill.formFields.find(field => field._id.toString() === formFieldId);
+
+            if (formField) {
+                res.status(200).json(formField);
+            } else {
+                res.status(404).json({ message: 'Form field not found in the specified bill' });
+            }
+        } else {
+            res.status(404).json({ message: 'Bill not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+
+
+export { createBill, getBills, getSingleBill, updateBill, getBillsByCustomerId,deleteBill,getFormFieldById };
