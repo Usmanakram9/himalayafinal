@@ -62,6 +62,8 @@ const deliverySchema = new mongoose.Schema({
     default: false,
   },
   // Add other fields as needed
+},{
+  timestamps: true, // Add timestamps option
 });
 
 const Delivery = mongoose.model("deliveries", deliverySchema);

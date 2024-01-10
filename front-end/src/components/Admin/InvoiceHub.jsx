@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useBillStore } from "../../stores/billStore";
 import { useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye,faTruck } from "@fortawesome/free-solid-svg-icons";
+import { faEye,faTruck,faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const InvoiceHub = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -388,13 +388,18 @@ const InvoiceHub = () => {
                 <button className="ml-2 focus:outline-none" onClick={()=>{
                   navigate(`/admin-panel/singleProd/${bill._id}/View/${field._id}`)
                 }}>
-                  <FontAwesomeIcon icon={faEye} />
+                  <FontAwesomeIcon className="text-blue-500" icon={faEye} />
                 
                 </button>
                 <button className="ml-2 focus:outline-none" onClick={()=>{
                   navigate(`/admin-panel/Delivery/${bill.customerId}/${bill._id}/${field._id}`)
                 }}>
-                <FontAwesomeIcon icon={faTruck} />
+                <FontAwesomeIcon className="text-yellow-300" icon={faTruck} />
+                </button>
+                <button className="ml-2 focus:outline-none" onClick={()=>{
+                  navigate(`/admin-panel/completedDelivery/${bill.customerId}/${bill._id}/${field._id}`)
+                }}>
+                <FontAwesomeIcon className="text-green-500" icon={faCheckCircle } />
                 </button>
               </td>
             </tr>

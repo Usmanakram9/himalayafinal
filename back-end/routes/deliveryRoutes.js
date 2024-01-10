@@ -6,6 +6,7 @@ import {
     getDeliveryById,
     updateDeliveryById,
     deleteDeliveryById,
+    getDeliveryByCustomerBillAndField
   } from '../controllers/deliveryController.js';
   
   const router = express.Router();
@@ -15,6 +16,7 @@ import {
   
   // Get all deliveries
   router.get('/', getAllDeliveries);
+  router.get('/:customerId/:billId/:formFieldId', getDeliveryByCustomerBillAndField);
   
   // Get a specific delivery by ID
   router.get('/:id', getDeliveryById);
