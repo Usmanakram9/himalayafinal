@@ -20,6 +20,8 @@ import InvoiceHub from './components/Admin/InvoiceHub';
 import SingleProdBill from './components/Admin/SingleProdBill';
 import DeliveryScreen from './components/Admin/DeliveryScreen';
 import CompletedDeliveryScreen from './components/Admin/CompletedDeliveryScreen';
+import AddPayment from './components/Admin/AddPayment';
+import PaymentHistory from './components/Admin/PaymentHistory';
 
 let isAdmin = false;
 
@@ -44,6 +46,8 @@ const router = (
       <Route path="/admin-panel/singleProd/:billId/View/:formFieldId" element={<SingleProdBill />} />
       <Route path="/admin-panel/Delivery/:custID/:billId/:formFieldId" element={<DeliveryScreen />}/>
       <Route path="/admin-panel/completedDelivery/:custID/:billId/:formFieldId" element={<CompletedDeliveryScreen />}/>
+      <Route path="/admin-panel/addPayment/:custID/:billId/" element={<AddPayment />}/>
+      <Route path="/admin-panel/PaymentHistory/:billId" element={<PaymentHistory />}/>
       <Route path="/test" element={<Test />} />
     
     </Routes>

@@ -1,9 +1,15 @@
-import React, {useEffect} from 'react'
+import React, {useEffect,useState} from 'react'
 import { useNavigate,useParams } from 'react-router-dom';
 import { useDeliveryStore } from '../../stores/deliveryStore';
-import {format} from 'date-fns'
+import {format} from 'date-fns';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPrint } from "@fortawesome/free-solid-svg-icons";
+import { PDFDownloadLink,PDFViewer } from '@react-pdf/renderer'; 
+import PDFDoc from './Utils/PDFDoc';
 
 const CompletedDeliveryScreen = () => {
+	const [recordsToShow, setRecordsToShow] = useState(5);  
+	const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
     const {custID,billId,formFieldId}= useParams();
     const {getDeliveryByCustomerBillAndField,singleDelivery, isLoading, error} = useDeliveryStore();
@@ -25,6 +31,13 @@ if (isLoading) {
     );
   }
 
+  if (!singleDelivery) {
+    return <p>Data is still loading...</p>;
+  }
+
+  const filteredDeliveries = singleDelivery ? singleDelivery.filter((delivery) =>
+  delivery._id.toLowerCase().includes(searchQuery.toLowerCase())
+) : [];
   return (
     <>
     <div className="mx-auto mt-8 p-8">
@@ -35,8 +48,19 @@ if (isLoading) {
   
 <div className="max-w-screen-xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
 	<div className="overflow-x-auto">
+		<div className="searchBar">
+		<input
+            type="text"
+            placeholder="Search by Shipment Tag"
+            className="border border-gray-500 rounded-md px-2 py-1 ml-2 mb-2"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+		</div>
+	
 	{singleDelivery ? (
 		<table className="min-w-full bg-white border border-gray-200 rounded-xl">
+			
 			<thead>
 				<tr className="bg-gray-200 h-30px">
 					<th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Shipment Tag</th>
@@ -54,7 +78,7 @@ if (isLoading) {
 				</tr>
 			</thead>
 			<tbody>
-			{singleDelivery.map((delivery, index) => (
+			{filteredDeliveries.slice(0, recordsToShow).map((delivery, index) => (
 				<tr key={index} className="h-72px hover:bg-gray-100 transition duration-150 ease-in-out">
 					<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
 						<div className="flex items-center flex-row gap-2">
@@ -79,20 +103,26 @@ if (isLoading) {
         <span className="px-2 inline-flex text-xs leading-4 font-semibold rounded-full bg-gray-200 text-gray-800">Pending</span>
       )}
     </td>
-					<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-						<button className="text-gray-500 hover:text-blue-500 focus:outline-none">
-							
-							<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-								<path fillRule="evenodd" d="M14.293 2.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-12 12a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414l12-12zM15 4l-10 10V16h4.586L15 14.586V4z" clipRule="evenodd" />
-							</svg>
-						</button>
-						<button className="text-gray-500 hover:text-red-500 focus:outline-none">
-							
-							<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-								<path fillRule="evenodd" d="M2 5a1 1 0 011-1h14a1 1 0 011 1v1h1a1 1 0 110 2h-1v9a1 1 0 01-1 1H2a1 1 0 01-1-1V7a1 1 0 011-1zm15-2H3a1 1 0 00-1 1v1h16V4a1 1 0 00-1-1z" clipRule="evenodd" />
-							</svg>
-						</button>
-					</td>
+				<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+				<PDFDownloadLink
+    document={<PDFDoc delivery={delivery} />}
+    fileName={`delivery_record_${delivery._id}_date${delivery.createdAt}.pdf`}
+  >
+    {({ loading }) =>
+      loading ? (
+        'Loading document...'
+      ) : (
+        <button className="text-gray-500 hover:text-blue-500 focus:outline-none">
+          <FontAwesomeIcon icon={faPrint} className="text-gray-500 hover:text-blue-500 ml-2 cursor-pointer" />
+        </button>
+      )
+    }
+  </PDFDownloadLink>
+  <PDFViewer>
+	<PDFDoc delivery={delivery}/>
+  </PDFViewer>
+  
+    </td>
 				</tr>
 				))}
 			</tbody>
@@ -102,27 +132,17 @@ if (isLoading) {
 						<div className="flex items-center justify-between">
 							<div className="flex items-center">
 								<span className="mr-2">Show Records</span>
-								<select className="form-select border border-gray-300 rounded-md px-2 py-1 focus:ring focus:ring-blue-200 focus:border-blue-500 text-sm">
-									<option value="5">5</option>
-									<option value="10">10</option>
-									<option value="20">20</option>
-								</select>
+								<select
+            className="form-select border border-gray-300 rounded-md px-2 py-1 focus:ring focus:ring-blue-200 focus:border-blue-500 text-sm"
+            onChange={(e) => setRecordsToShow(parseInt(e.target.value))}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+		
 							</div>
-							<div className="flex items-center space-x-4">
-								<span>1 - 8 de 25</span>
-								<button className="text-gray-500 hover:text-blue-500 focus:outline-none">
-									
-									<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-										<path fillRule="evenodd" d="M9.293 12.293a1 1 0 011.414 0L15 16.586V6a1 1 0 112 0v10a1 1 0 01-1 1H4a1 1 0 110-2h10a1 1 0 01-.707-.293a1 1 0 010-1.414z" clipRule="evenodd" />
-									</svg>
-								</button>
-								<button className="text-gray-500 hover:text-blue-500 focus:outline-none">
-									
-									<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-										<path fillRule="evenodd" d="M10.293 9.293a1 1 0 011.414 0L15 13.586V3a1 1 0 112 0v10a1 1 0 01-1 1H4a1 1 0 010-2h10a1 1 0 01-.707-.293a1 1 0 010-1.414z" clipRule="evenodd" />
-									</svg>
-								</button>
-							</div>
+						
 						</div>
 					</td>
 				</tr>

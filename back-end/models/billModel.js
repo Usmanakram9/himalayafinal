@@ -20,7 +20,7 @@ const formFieldSchema = new mongoose.Schema({
   resultPoolish: String,
   poolishAmount: String,
   edgepoolish: String,
-  edgepoolishrate: String,
+  edgepoolishrate: String, 
   edgepoolishamount: String,
   subtotal: Number,
   leatherpoolish: Boolean,

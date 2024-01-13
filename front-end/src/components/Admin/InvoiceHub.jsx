@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useBillStore } from "../../stores/billStore";
 import { useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye,faTruck,faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faEye,faTruck,faCheckCircle,faMoneyCheck,faHistory } from "@fortawesome/free-solid-svg-icons";
 
 const InvoiceHub = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -126,6 +126,7 @@ const InvoiceHub = () => {
         <th className="px-4 py-2 bg-blueGray-50 text-blueGray-700 uppercase border border-solid border-blueGray-100 whitespace-nowrap font-semibold text-left min-w-140-px">
           Progress
         </th>
+       
       </tr>
     </thead>
     <tbody>
@@ -173,6 +174,7 @@ const InvoiceHub = () => {
               </div>
             </div>
           </td>
+         
         </tr>
       ))}
     </tbody>
@@ -211,18 +213,22 @@ const InvoiceHub = () => {
   <table className="w-full table-auto border-collapse text-blueGray-700">
     <thead>
     <tr>
-  <th className="hidden sm:table-cell px-4 py-2 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 text-xs sm:text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+  <th className="hidden sm:table-cell px-4 py-2 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 text-xs sm:text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
     Total Amount
   </th>
-  <th className="hidden sm:table-cell px-4 py-2 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 text-xs sm:text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+  <th className="hidden sm:table-cell px-4 py-2 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 text-xs sm:text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
     Paid
   </th>
-  <th className="hidden sm:table-cell px-4 py-2 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 text-xs sm:text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+  <th className="hidden sm:table-cell px-4 py-2 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 text-xs sm:text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
     Balance
   </th>
-  <th className="hidden sm:table-cell px-4 py-2 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 text-xs sm:text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+  <th className="hidden sm:table-cell px-4 py-2 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 text-xs sm:text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
     Progress
   </th>
+  <th className="hidden sm:table-cell px-4 py-2 bg-blueGray-50 text-black align-middle border border-solid border-blueGray-100 text-xs sm:text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center">
+    Update Payment
+  </th>
+
 </tr>
 
     </thead>
@@ -276,6 +282,22 @@ const InvoiceHub = () => {
                   </div>
                 </div>
               </td>
+              <td className="px-4 py-2 text-center md:table-cell bg-blueGray-50 text-green-500 border border-solid border-blueGray-100 text-xs sm:text-sm md:text-base whitespace-nowrap">
+              
+              <button className="ml-2 focus:outline-none" onClick={()=>{
+                  navigate(`/admin-panel/addPayment/${bill.customerId}/${bill._id}/`)
+                }}>
+          <FontAwesomeIcon icon={faMoneyCheck} />
+          </button>
+
+          <button className=" ml-2 focus:outline-none" onClick={()=>{
+                  navigate(`/admin-panel/PaymentHistory/${bill._id}`)
+                }}>
+          <FontAwesomeIcon className="text-blue-500" icon={faHistory} />
+         
+          </button>
+          
+          </td>
             </tr>
           );
         }
