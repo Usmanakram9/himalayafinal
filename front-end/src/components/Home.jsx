@@ -11,6 +11,7 @@ import Contact from "./Contact";
 import NewFooter from "./NewFooter";
 import NewNavBar from "../components/NewNavBar";
 
+
 const Home = () => {
   return (
     <>
@@ -76,6 +77,7 @@ const Home = () => {
         <div className="sticky top-0">
           <About />
         </div>
+      
         <div>
           <Products />
         </div>
@@ -85,6 +87,7 @@ const Home = () => {
         <div className="sticky top-0">
           <NewFooter />
         </div>
+      
       </>
     </>
   );

@@ -71,8 +71,8 @@ const deletePaymentById = async (req, res) => {
 
 const getPaymentsByBillId = async (req,res) => {
   try {
-    const {billId} = req.params;
-    const payments = await Payment.find({ billId });
+    const {billId,customerId} = req.params;
+    const payments = await Payment.find({ billId,customerId });
     
     if (!payments) {
       return res.status(404).json({ error: 'Delivery not found' });

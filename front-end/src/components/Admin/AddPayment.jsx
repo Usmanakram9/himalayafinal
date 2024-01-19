@@ -15,22 +15,39 @@ const AddPayment = () => {
         error,
       } = useBillStore();
       const totalAmount = singleBill?.totalAmount || 0;
+      const balance = singleBill?.balance || 0;
+
       useEffect(() => {
         // Fetch the form field when the component mounts
         
-        getSingleBill(billId);
+        const fetchBillDetails = async () => {
+          await getSingleBill(billId);
+        };
+    
+        fetchBillDetails();
       }, [billId]);
+
+      useEffect(() => {
+        // Update the state when the bill details are fetched
+        setFormData((prevData) => ({
+          ...prevData,
+          totalAmount: totalAmount,
+          balance: balance,
+        }));
+      }, [totalAmount, balance]);
+
     const [formData, setFormData] = useState({
         billId:billId,
         customerId: custID,
         totalAmount:totalAmount,
-        paid: 0,
-        balance: 0,
+        paid:  "",
+        balance: balance,
         paidVia: 'cash', // set default value if needed
   chequeNumber: '',
   transactionNumber: '',
   dated: new Date().toISOString().split('T')[0], 
       });
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         // Add your form submission logic here
@@ -48,10 +65,21 @@ const AddPayment = () => {
       };
       const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
+      
+        if (name === 'paid') {
+          const paidValue = parseInt(value, 10) || 0;
+          const newBalance = balance - paidValue;
+          setFormData((prevData) => ({
+            ...prevData,
+            [name]: paidValue,
+            balance: newBalance >= 0 ? newBalance : 0,
+          }));
+        } else {
+          setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+          }));
+        }
       };
 
       if (isLoading) {
@@ -100,7 +128,7 @@ const AddPayment = () => {
               type="text"
               name="balance"
               value={formData.balance}
-              onChange={handleInputChange}
+             
               placeholder="Enter balance amount"
               className="border p-2 rounded focus:outline-none focus:border-blue-500"
             />

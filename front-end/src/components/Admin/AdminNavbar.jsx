@@ -8,6 +8,9 @@ import {
   faEnvelope,
   faArrowLeft,
   faUser,
+  faBox,
+  faPlusCircle,
+  faList
 } from "@fortawesome/free-solid-svg-icons";
 
 const AdminNavBar = () => {
@@ -25,7 +28,7 @@ const AdminNavBar = () => {
           } fixed inset-y-0 z-10 flex flex-col w-80 transition-transform duration-300 text-black`}
         >
           <svg
-            className="absolute inset-0 w-full h-full text-black"
+            className="absolute inset-0 w-full h-full text-black opacity-70"
             style={{ filter: "drop-shadow(10px 0 10px #00000030)" }}
             preserveAspectRatio="none"
             viewBox="0 0 309 800"
@@ -39,7 +42,7 @@ const AdminNavBar = () => {
               isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             } fixed inset-y-0 z-10 flex flex-col w-80 transition-transform duration-300 text-white`}
           >
-            <h1 className="text-2xl font-semibold">Himalaya Enterprises</h1>
+            <Link to={'/admin-panel/'} className="text-2xl mt-6 font-semibold">Himalaya Enterprises</Link>
             <button
               onClick={() => setIsSidebarOpen(false)}
               className="absolute top-6 right-10 p-2 text-white hover:text-gray-800 focus:outline-none"
@@ -66,20 +69,20 @@ const AdminNavBar = () => {
                   onClick={() => setProdBar(!prodbar)}
                   className="flex items-center hover:text-yellow-500"
                 >
-                  <FontAwesomeIcon icon={faHome} className="w-5 h-5 mr-2" />
+                  <FontAwesomeIcon icon={faBox} className="w-5 h-5 mr-2" />
                   Products
                 </button>
               </li>
               {prodbar && (
                 <>
                   <li className="flex items-center hover:text-yellow-500 ml-8 mt-2">
-                    <FontAwesomeIcon icon={faHome} className="w-5 h-5 mr-2" />
+                    <FontAwesomeIcon icon={faPlusCircle} className="w-5 h-5 mr-2" />
                     <Link to="/admin-panel/products/addproduct">
                       Add Product
                     </Link>
                   </li>
                   <li className="flex items-center hover:text-yellow-500 ml-8 mt-2">
-                    <FontAwesomeIcon icon={faHome} className="w-5 h-5 mr-2" />
+                    <FontAwesomeIcon icon={faPlusCircle} className="w-5 h-5 mr-2" />
                     <Link to="/admin-panel/products/addsubproduct">
                       Add Sub Product
                     </Link>
@@ -91,19 +94,20 @@ const AdminNavBar = () => {
                   onClick={() => setUsersBar(!usersBar)}
                   className="flex items-center hover:text-yellow-500"
                 >
-                  <FontAwesomeIcon icon={faHome} className="w-5 h-5 mr-2" />
+                  <FontAwesomeIcon icon={faUser} className="w-5 h-5 mr-2" />
                   Customers
                 </button>
               </li>
               {usersBar && (
                 <>
+                  
                   <li className="flex items-center hover:text-yellow-500 ml-8 mt-2">
-                    <FontAwesomeIcon icon={faHome} className="w-5 h-5 mr-2" />
-                    <Link to="/admin-panel/users">All Customers</Link>
+                    <FontAwesomeIcon icon={faPlusCircle} className="w-5 h-5 mr-2" />
+                    <Link to="/admin-panel/addcustomer">Add Customer</Link>
                   </li>
                   <li className="flex items-center hover:text-yellow-500 ml-8 mt-2">
-                    <FontAwesomeIcon icon={faHome} className="w-5 h-5 mr-2" />
-                    <Link to="/admin-panel/addcustomer">Add Customer</Link>
+                    <FontAwesomeIcon icon={faList} className="w-5 h-5 mr-2" />
+                    <Link to="/admin-panel/users">All Customers</Link>
                   </li>
                 </>
               )}

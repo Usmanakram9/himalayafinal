@@ -47,7 +47,7 @@ const router = (
       <Route path="/admin-panel/Delivery/:custID/:billId/:formFieldId" element={<DeliveryScreen />}/>
       <Route path="/admin-panel/completedDelivery/:custID/:billId/:formFieldId" element={<CompletedDeliveryScreen />}/>
       <Route path="/admin-panel/addPayment/:custID/:billId/" element={<AddPayment />}/>
-      <Route path="/admin-panel/PaymentHistory/:billId" element={<PaymentHistory />}/>
+      <Route path="/admin-panel/PaymentHistory/:billId/:custId" element={<PaymentHistory />}/>
       <Route path="/test" element={<Test />} />
     
     </Routes>

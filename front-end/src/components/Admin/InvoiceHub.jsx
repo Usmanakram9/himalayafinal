@@ -19,7 +19,10 @@ const InvoiceHub = () => {
 
   useEffect(() => {
     // Fetch bills based on the customer ID using Zustand store
-    getBillsByCustomerId(id);
+    const fetch = async ()=>{
+     await getBillsByCustomerId(id);
+    }
+    fetch();
   }, [id, getBillsByCustomerId]);
 
   useEffect(() => {
@@ -291,7 +294,7 @@ const InvoiceHub = () => {
           </button>
 
           <button className=" ml-2 focus:outline-none" onClick={()=>{
-                  navigate(`/admin-panel/PaymentHistory/${bill._id}`)
+                  navigate(`/admin-panel/PaymentHistory/${bill._id}/${bill.customerId}`)
                 }}>
           <FontAwesomeIcon className="text-blue-500" icon={faHistory} />
          

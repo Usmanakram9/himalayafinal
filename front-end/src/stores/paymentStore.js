@@ -71,10 +71,10 @@ export const usePaymentStore = create((set) => ({
     }
   },
  
-  getPaymentsByBillId: async (billId) => {
+  getPaymentsByBillId: async (billId,custId) => {
     try {
       set({ isLoading: true, error: null });
-      const response = await axios.get(`http://localhost:8000/api/payments/getBy/${billId}`);
+      const response = await axios.get(`http://localhost:8000/api/payments/getBy/${billId}/${custId}`);
       set({ payments: response.data, isLoading: false });
     } catch (error) {
       console.error('Error fetching payments by bill_id:', error);

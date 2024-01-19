@@ -27,6 +27,6 @@ router.put('/:paymentId', updatePaymentById);
 // Delete a payment by ID
 router.delete('/:paymentId', deletePaymentById);
 
-router.get('/getBy/:billId',getPaymentsByBillId)
+router.get('/getBy/:billId/:customerId',getPaymentsByBillId)
 
 export default router;

@@ -9,7 +9,6 @@ const deliverySchema = new mongoose.Schema({
   customerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "customers",
-   
   },
   formFieldId: {
     type: mongoose.Schema.Types.ObjectId,
