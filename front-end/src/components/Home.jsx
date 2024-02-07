@@ -15,6 +15,9 @@ import NewNavBar from "../components/NewNavBar";
 const Home = () => {
   return (
     <>
+   
+ 
+
       <NewNavBar />
 
       <section id="home" className="home">

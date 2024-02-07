@@ -20,6 +20,7 @@ const CreateBill = () => {
 
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
+    SiteName:"",
     productName: "",
     measurementType: "",
     prodWidth: "",
@@ -31,7 +32,7 @@ const CreateBill = () => {
     prodThickness: "",
     prodRate: "",
     prodamount: "",
-    topPoolish: false,
+    topPoolish: "",
     resultPoolish: "",
     poolishAmount: "",
     edgepoolish: "",
@@ -154,6 +155,7 @@ const CreateBill = () => {
 
     // Clear the form data
     setFormData({
+      SiteName:"",
       productName: "",
       measurementType: "",
       prodWidth: "",
@@ -215,8 +217,9 @@ const CreateBill = () => {
     // Update the counter in local storage
     localStorage.setItem("counter", nextCounter);
 
-    // Clear the form data
+    // Clear the form data 
     setFormData({
+      SiteName: "",
       productName: "",
       measurementType: "",
       prodWidth: "",
@@ -703,6 +706,17 @@ const CreateBill = () => {
                 <>
                   {/* Step 2: Factory Name, Contact Number, CNIC */}
                   <div className="flex flex-col">
+                  <label className="text-gray-500 mb-2 text-xs lg:text-base">
+                      Site Name
+                    </label>
+                    <input
+                      name="SiteName"
+                      value={formData.SiteName}
+                      onChange={handleInputChange}
+                      className="text-xs lg:text-base outline outline-gray-400 mb-4 p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-black"
+                      type="text"
+                      placeholder="Enter Site Name"
+                    />
                     <label className="text-gray-500 mb-2 text-xs lg:text-base">
                       Product Name
                     </label>

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const formFieldSchema = new mongoose.Schema({
+  SiteName: String,
   firstname: String,
   factoryName: String,
   contact: String,
@@ -42,7 +43,6 @@ const billSchema = new mongoose.Schema(
     },
     factoryName: {
       type: String,
-
       trim: true,
     },
     contactNum: {

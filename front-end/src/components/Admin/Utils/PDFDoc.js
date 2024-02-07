@@ -38,8 +38,11 @@ const PDFDoc = ({ delivery }) => (
   </View>
   
   <View style={tw("flex justify-end")}>
-    <Image style={{ display: 'flex', justifyContent: 'end',height: '64px', width: '64px'}} src={logo} alt="avatar" />
-    <Text style={tw("text-2xl font-semibold text-gray-800")}>Order #{delivery._id}</Text>
+  <View style={tw("flex justify-end w-200 items-end")}>
+  <Image style={tw("w-24 h-24")} src={logo} alt="avatar" />
+</View>
+
+    <Text style={tw("text-1xl font-semibold text-gray-800")}>Order #{delivery._id}</Text>
   </View>
   
 </View>

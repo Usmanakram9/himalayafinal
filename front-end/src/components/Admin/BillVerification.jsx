@@ -34,6 +34,9 @@ const FormDataBox = ({ formData, onDelete, onUpdate }) => {
   <span className="font-bold">CNIC:</span> {formData.cnic}
 </h3>
 <h3 className="text-xl mb-2">
+  <span className="font-bold">Site Name:</span> {formData.SiteName}
+</h3>
+<h3 className="text-xl mb-2">
   <span className="font-bold">Product Name:</span> {formData.productName}
 </h3>
 <h3 className="text-xl mb-2">
@@ -189,6 +192,7 @@ const BillVerification = () => {
           // contact: formData.contact,
           // cnic: Number(formData.cnic), // Ensure cnic is a number
           // Add other form fields based on your formFieldSchema
+          SiteName: formData.SiteName,
           productName: formData.productName,
           measurementType: formData.measurementType,
           prodWidth: formData.prodWidth,
@@ -198,7 +202,7 @@ const BillVerification = () => {
           prodThickness: formData.prodThickness,
           prodRate: formData.prodRate,
           prodamount: formData.prodamount,
-          topPoolish: formData.topPoolish === "Yes",
+          topPoolish: !!formData.topPoolish, 
           resultPoolish: formData.resultPoolish,
           poolishAmount: formData.poolishAmount,
           edgepoolish: formData.edgepoolish,

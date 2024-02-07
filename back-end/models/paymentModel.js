@@ -11,7 +11,7 @@ const paymentSchema = new mongoose.Schema({
     ref: "customers",
   },
   totalAmount: {
-    type: Number, 
+    type: Number,  
     required: true,
   },
   paid: {

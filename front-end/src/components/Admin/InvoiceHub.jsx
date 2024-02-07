@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useBillStore } from "../../stores/billStore";
 import { useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye,faTruck,faCheckCircle,faMoneyCheck,faHistory } from "@fortawesome/free-solid-svg-icons";
+import { faEye,faTruck,faCheckCircle,faMoneyCheck,faHistory,faUsers,faFileInvoice } from "@fortawesome/free-solid-svg-icons";
 
 const InvoiceHub = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -36,6 +36,10 @@ const InvoiceHub = () => {
   }, [selectedBills]);
 
   const useback = useCallback(() => {
+    navigate("/admin-panel/");
+  }, [navigate]);
+
+  const useClient = useCallback(() => {
     navigate("/admin-panel/users");
   }, [navigate]);
 
@@ -59,12 +63,80 @@ const InvoiceHub = () => {
   // const createdAtDate = bills.length > 0 ? new Date(bill.createdAt) : null;
   return (
     <>
+    
       <div className="container mx-auto mt-8 p-8 bg-white rounded shadow-lg">
         {/* Back Button */}
-        <button className="text-blue-500 text-sm mb-4" onClick={useback}>
+        {/* <button className="text-blue-500 text-sm mb-4" onClick={useback}>
           &larr; Back
+        </button> */}
+        <div className="flex items-center py-4 whitespace-nowrap ml-4">
+        <button onClick={useback} className="text-gray-700">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+          </svg>
         </button>
 
+        <span className="mx-5 text-gray-500 rtl:-scale-x-100">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </span>
+
+        <button
+         onClick={useClient}
+          className="flex items-center text-gray-600 -px-2 hover:underline"
+        >
+          <FontAwesomeIcon
+            icon={faUsers}
+            className="w-6 h-6 mx-2 text-current"
+            title="Client List"
+          />
+
+          <span className="mx-2">Client's List</span>
+        </button>
+
+        <span className="mx-5 text-gray-500 rtl:-scale-x-100">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </span>
+
+        <button
+         
+          className="flex items-center text-blue-600 -px-2 hover:underline"
+        >
+          <FontAwesomeIcon
+            icon={faFileInvoice}
+            className="w-6 h-6 mx-2 text-current"
+            title="Client List"
+          />
+
+          <span className="mx-2">Bill's Detail</span>
+        </button>
+      </div>
         {/* Heading */}
 
         {/* Table */}

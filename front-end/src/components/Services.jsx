@@ -6,6 +6,7 @@ const Services = () => {
   return (
     <section id="services" className='services-section'>
       <div className="container mx-auto py-10">
+        
         <h1 className="text-4xl text-white font-bold mb-6 text-center mt-16">Services</h1>
 
         <div className="text-center mb-8">
