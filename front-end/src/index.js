@@ -14,7 +14,7 @@ import UsersList from './components/Admin/UsersList';
 import AddCustomer from './components/Admin/AddCustomer';
 import ProductDetailsScreen from './screens/ProductDetailsScreen';
 import CreateBill from './components/Admin/CreateBill';
-import Test from './components/Test';
+
 import BillVerification from './components/Admin/BillVerification';
 import InvoiceHub from './components/Admin/InvoiceHub';
 import SingleProdBill from './components/Admin/SingleProdBill';
@@ -48,7 +48,7 @@ const router = (
       <Route path="/admin-panel/completedDelivery/:custID/:billId/:formFieldId" element={<CompletedDeliveryScreen />}/>
       <Route path="/admin-panel/addPayment/:custID/:billId/" element={<AddPayment />}/>
       <Route path="/admin-panel/PaymentHistory/:billId/:custId" element={<PaymentHistory />}/>
-      <Route path="/test" element={<Test />} />
+      
     
     </Routes>
   </BrowserRouter>

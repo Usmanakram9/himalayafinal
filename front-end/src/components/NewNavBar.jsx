@@ -1,11 +1,114 @@
 import React, { useState } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {  faArrowRight} from "@fortawesome/free-solid-svg-icons";
+import { CiUser,CiTimer,CiFacebook,CiInstagram,CiTwitter,CiPhone  } from "react-icons/ci";
+import { MdMarkEmailUnread } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaOpencart } from "react-icons/fa6";
 
 const NewNavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [menubar, setMenuBar] = useState(false);
 
   return (
     <>
+    <div className="hidden md:flex justify-between w-full lg:flex bg-gradient-to-r from-cyan-600 to-cyan-800 text-white">
+<div className="flex space-x-2 ml-2 jsutify-between text-white ">
+<CiTimer className="mt-1"/> 
+<div className="text">
+  Mon 9:00 a.m to 6:00 p.m
+</div>
+<div className="flex justify-between text-2xl">
+<CiFacebook />
+<CiInstagram />
+<CiTwitter />
+</div>
+</div>
+<div className="flex space-x-2 mr-2">
+  <div className="flex space-x-2"><CiPhone className="text-2xl" /> +91 123456789</div>
+  <div className="flex space-x-2"><MdMarkEmailUnread className="text-2xl mr-1" />my@gmail.com</div>
+</div>
+    </div>
+     
+      <div className="flex justify-between antialiased text-gray-900 bg-white relative overflow-hidden fixed z-30">
+      <div className="flex justify-between items-center mb-2 rounded w-10 h-10 ml-2 mt-2 text-2xl cursor-pointer lg:hidden bg-gradient-to-r from-cyan-600 to-cyan-800 hover:from-cyan-700 hover:to-cyan-900">
+        
+        <GiHamburgerMenu onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-black flex items-center w-full"/>
+        
+      </div>
+    
+        <div className="hidden lg:flex justify-center w-full">
+         <ul className="flex space-x-4 mt-5">
+            <li>
+             
+              <Link to="/" className="text-lg md:text-sm">
+                <span className="text-black hover:text-cyan-800 hover:border-b-2 hover:border-b-cyan-800">
+                  Home
+                </span>
+              </Link>
+            </li>
+            <li>
+             
+              <Link to="/" className="text-lg md:text-sm">
+                <span className="text-black hover:text-cyan-800 hover:border-b-2 hover:border-b-cyan-800">
+                  About Us
+                </span>
+              </Link>
+            </li>
+            <li>
+              
+              <Link to="/" className="text-lg md:text-sm">
+                <span className="text-black hover:text-cyan-800 hover:border-b-2 hover:border-b-cyan-800 ">
+                  Our Services
+                </span>
+              </Link>
+            </li>
+            <li>
+              
+              <Link to="/" className="text-lg md:text-sm">
+                <span className="text-black hover:text-cyan-800 hover:border-b-2 hover:border-b-cyan-800">
+                  Our History
+                </span>
+              </Link>
+            </li>
+           
+          </ul>
+        </div>
+        <div className="flex w-full p-2 justify-center">
+          <div className="flex flex-col items-center">
+            <div className="text-black opacity-50">Himalaya</div>
+
+            <div className="text-black text-2xl">Enterprises</div>
+          </div>
+        </div>
+        <div className="hidden lg:flex w-full justify-end space-x-4 items-center p-2">
+          <div className="search">
+            <input
+              type="text"
+              placeholder="Search Product"
+              className="border border-gray-300 lg:px-2 lg:py-2 rounded-md mr-2 focus:outline-none focus:ring-2 focus:ring-blue-500 md:px-1 md:py-1"
+            />
+            <button className="bg-gradient-to-r from-cyan-600 to-cyan-800 hover:from-cyan-700 hover:to-cyan-900 text-white lg:px-2 lg:py-2 rounded-md mr-2 md:px-1 md:py-1">
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
+          <div className="relative">
+          <FaOpencart className="h-8 w-8"/>
+            <div className="absolute top-0 right-0 -mt-3 bg-red-500 text-white w-4 h-4 flex justify-center items-center rounded-full">
+              0
+            </div>
+          </div>
+          <CiUser className="h-8 w-8" />
+        </div>
+        <div className="lg:hidden xl:hidden md:flex sm:flex space-x-4 justify-end items-center p-2">
+        <FaOpencart className="h-8 w-8"/>
+            <div className="absolute top-0 right-0 mt-1 bg-red-500 text-white w-4 h-4 flex justify-center items-center rounded-full">
+              0
+            </div>
+          </div>
+      </div>
       <div className="flex antialiased text-gray-900 bg-gray-100 dark:bg-dark dark:text-light relative overflow-hidden fixed z-20">
         {/* Sidebar */}
         <div
@@ -109,12 +212,12 @@ const NewNavBar = () => {
           </div>
         </div>
         {/* Menu Button (Fixed) */}
-        <button
+        {/* <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="fixed p-2 text-2xl bg-black text-white rounded-lg top-5 left-5"
         >
           Menu
-        </button>
+        </button> */}
       </div>
     </>
   );

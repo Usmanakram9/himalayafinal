@@ -4,7 +4,7 @@ import "../assets/css/product-screen.css";
 import useSubProductStore from "../stores/subProductStore";
 import useProductStore from "../stores/productStore";
 import NewNavBar from "../components/NewNavBar";
-import NewFooter from "../components/NewFooter";
+
 
 const ProductsScreen = () => {
   const { data, getSubProducts } = useSubProductStore();
@@ -78,7 +78,7 @@ const ProductsScreen = () => {
           </div>
         </div>
 
-        <NewFooter />
+      
       </section>
     </>
   );
