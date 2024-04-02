@@ -22,6 +22,7 @@ import DeliveryScreen from './components/Admin/DeliveryScreen';
 import CompletedDeliveryScreen from './components/Admin/CompletedDeliveryScreen';
 import AddPayment from './components/Admin/AddPayment';
 import PaymentHistory from './components/Admin/PaymentHistory';
+import SingleProduct from './components/pages/SingleProduct';
 
 let isAdmin = false;
 
@@ -32,6 +33,7 @@ const router = (
       <Route path="/" element={<App />}>
         <Route index={true} element={<Home  />} />
         <Route path="/products" element={<ProductsScreen />} />
+        <Route path="/SingleProduct" element={<SingleProduct />} />
         <Route path='/productdetail/:productId' element={<ProductDetailsScreen/>} />
       </Route>
 
@@ -51,7 +53,7 @@ const router = (
       
     
     </Routes>
-  </BrowserRouter>
+  </BrowserRouter> 
 );
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

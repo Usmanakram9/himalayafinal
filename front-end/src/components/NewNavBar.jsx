@@ -10,7 +10,7 @@ import { FaOpencart } from "react-icons/fa6";
 
 const NewNavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [menubar, setMenuBar] = useState(false);
+  // const [menubar, setMenuBar] = useState(false);
 
   return (
     <>
@@ -94,7 +94,7 @@ const NewNavBar = () => {
               <FontAwesomeIcon icon={faArrowRight} />
             </button>
           </div>
-          <div className="relative">
+          <div className="relative cursor-pointer">
           <FaOpencart className="h-8 w-8"/>
             <div className="absolute top-0 right-0 -mt-3 bg-red-500 text-white w-4 h-4 flex justify-center items-center rounded-full">
               0

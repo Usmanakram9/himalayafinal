@@ -1,6 +1,6 @@
 import React from 'react';
-import '../assets/css/ProfColl.css';
-import bg from '../assets/images/bg.jpg';
+import '../../../assets/css/ProfColl.css';
+import bg from '../../../assets/images/bg.jpg';
 
 const ProfCollec = () => {
   return (

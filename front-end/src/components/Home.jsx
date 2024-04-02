@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-scroll";
 import bg1 from "../assets/images/bg.jpg";
 import bg2 from "../assets/images/product3.jpg";
 import bg3 from "../assets/images/product4.jpg";
 
 import "../assets/css/Home.css";
 
-import Carousel from "./Carousel";
-
-
-
-
 import NewNavBar from "../components/NewNavBar";
-import AboutUs from "./AboutUs";
-import ServInitial from "./ServInitial";
-import ShowSection from "./ShowSection";
-import ProfCollec from "./ProfCollec";
-import AboutInitial from "./AboutInitial";
+
+import ServInitial from "./pages/landingPage/ServInitial";
+import ShowSection from "./pages/landingPage/ShowSection";
+import ProfCollec from "./pages/landingPage/ProfCollec";
+import AboutInitial from "./pages/landingPage/AboutInitial";
+import Products from "./pages/landingPage/Products";
+import Testimonials from "./pages/landingPage/Testimonials";
+import Gallery from "./pages/landingPage/Gallery";
+import Footer from "./Footer";
 
 const Home = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -101,28 +99,18 @@ const Home = () => {
       </div>
 
       <ServInitial />
-<ShowSection  />
+      <ShowSection />
+
+      <ProfCollec />
+      <AboutInitial />
+      <Products />
+
+      <Testimonials />
+      <Gallery />
+    <Footer />
+          {/* <AboutUs /> */}
+
       
-
-<ProfCollec />
-<AboutInitial />
-      <AboutUs />
-
-
-      
-      <>
-        {/* <div>
-          <DotNavigation />
-        </div> */}
-        <div className="sticky top-0">
-          <Carousel />
-        </div>
-       
-
-       
-      
-       
-      </>
     </>
   );
 };

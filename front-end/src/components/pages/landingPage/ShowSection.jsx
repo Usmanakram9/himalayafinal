@@ -1,12 +1,38 @@
-import React from 'react';
-import bg from '../assets/images/bath.jpg';
+import React, { useState, useEffect } from 'react';
+import bg from '../../../assets/images/bath.jpg';
+import '../../../assets/css/ShowSection.css'
 
 const ShowSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Calculate the distance from the top of the document to the top of the viewport
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      // Define the scroll position at which the animation should start
+      const scrollTrigger = 400; // Adjust this value as needed
+
+      if (scrollTop > scrollTrigger) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <>
-    <div className="flex flex-col md:flex-col md:w-full h-screen lg:flex-row justify-between w-full md:p-5 lg:p-5 ">
+    <div className="flex flex-col md:flex-col md:w-full h-screen lg:flex-row justify-between w-full md:p-5 lg:p-5 overflow-hidden ">
 
-    <div className="flex flex-col w-full md:w-full lg:w-1/2 p-5  ">
+    <div className={`flex flex-col w-full md:w-full lg:w-1/2 p-5 ${isVisible ? 'animate-left' : 'opacity-0 -translate-x-full'}`}>
 <div className="flex flex-col space-y-4">
     <p className='text-gray-500'>SUSTAINABLE BATHROOM DREAMS</p>
     <div className="flex w-full items-end text-5xl mb-4 font-bold">
@@ -41,7 +67,7 @@ const ShowSection = () => {
     </div>
 
    
-    <div className="flex flex-col w-full md:w-full lg:w-1/2 p-5  ">
+    <div className={`flex flex-col w-full md:w-full lg:w-1/2 p-5 ${isVisible ? 'animate-right' : 'opacity-0 translate-x-full'}`}>
 <img src={bg} className=' h-4/4 w-4/4 md:w-full lg:w-full lg:h-screen md:h-3/4 rounded' alt="imageOf" />
     </div>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/css/ServInitital.css";
+import "../../../assets/css/ServInitital.css";
 
 const ServInitial = () => {
   return (
