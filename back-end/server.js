@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', userRoutes);
 app.use('/api/customer', customerRoute); 
-app.use('/api/product', productRoutes); 
+app.use('/api/', productRoutes); 
 app.use('/api/subproducts', subproductsRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/bill', billRoutes);
@@ -45,7 +45,7 @@ const frontendUploadsPath = path.join(new URL('.', import.meta.url).pathname, '.
 app.use('/uploads', express.static(frontendUploadsPath));
 
 
-app.listen(port, () => {
+app.listen(port, () => { 
   console.log(`Server is running on port ${port}`);
 });
 
