@@ -1,9 +1,8 @@
-// useProductStore.js
 import axios from "axios";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-const useProductStore = create(
+const useSignupStore = create(
   devtools((set) => ({
     data: [],
     singleUser: [],
@@ -85,8 +84,19 @@ const useProductStore = create(
           "http://localhost:8000/api/customer/signup",
           userData
         );
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem(
+          "userDetails",
+          JSON.stringify({
+            _id: response.data._id,
+            firstname: response.data.firstname,
+            lastname: response.data.lastname,
+            email: response.data.email,
+          })
+        );
         // Assuming the response contains user details and token
         set({ user: response.data, isLoading: false });
+        return response.data;
       } catch (error) {
         console.error("Error signing up:", error);
         set({ error, isLoading: false });
@@ -102,6 +112,19 @@ const useProductStore = create(
         );
         // Assuming the response contains user details and token
         set({ user: response.data, isLoading: false });
+
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem(
+          "userDetails",
+          JSON.stringify({
+            _id: response.data._id,
+            firstname: response.data.firstname,
+            lastname: response.data.lastname,
+            email: response.data.email,
+          })
+        );
+
+        return response.data;
       } catch (error) {
         console.error("Error logging in:", error);
         set({ error, isLoading: false });
@@ -122,7 +145,14 @@ const useProductStore = create(
         set({ error, isLoading: false });
       }
     },
+    logout: () => {
+      // Clear user data from localStorage and state
+      localStorage.removeItem("token");
+      localStorage.removeItem("userDetails");
+      window.location.reload();
+      set({ user: null });
+    },
   }))
 );
 
-export default useProductStore;
+export default useSignupStore;

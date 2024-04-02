@@ -1,48 +1,67 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faArrowRight} from "@fortawesome/free-solid-svg-icons";
-import { CiUser,CiTimer,CiFacebook,CiInstagram,CiTwitter,CiPhone  } from "react-icons/ci";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  CiUser,
+  CiTimer,
+  CiFacebook,
+  CiInstagram,
+  CiTwitter,
+  CiPhone,
+} from "react-icons/ci";
+
 import { MdMarkEmailUnread } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaOpencart } from "react-icons/fa6";
+import useSignupStore from "../stores/signupStore";
 
 const NewNavBar = () => {
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  // const [menubar, setMenuBar] = useState(false);
+  const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+  const [showLogout, setShowLogout] = useState(false);
+  const { logout } = useSignupStore();
+
+  const handleToggleLogout = () => {
+    setShowLogout(!showLogout);
+  };
 
   return (
     <>
-    <div className="hidden md:flex justify-between w-full lg:flex bg-gradient-to-r from-cyan-600 to-cyan-800 text-white">
-<div className="flex space-x-2 ml-2 jsutify-between text-white ">
-<CiTimer className="mt-1"/> 
-<div className="text">
-  Mon 9:00 a.m to 6:00 p.m
-</div>
-<div className="flex justify-between text-2xl">
-<CiFacebook />
-<CiInstagram />
-<CiTwitter />
-</div>
-</div>
-<div className="flex space-x-2 mr-2">
-  <div className="flex space-x-2"><CiPhone className="text-2xl" /> +91 123456789</div>
-  <div className="flex space-x-2"><MdMarkEmailUnread className="text-2xl mr-1" />my@gmail.com</div>
-</div>
-    </div>
-     
-      <div className="flex justify-between antialiased text-gray-900 bg-white relative overflow-hidden fixed z-30">
-      <div className="flex justify-between items-center mb-2 rounded w-10 h-10 ml-2 mt-2 text-2xl cursor-pointer lg:hidden bg-gradient-to-r from-cyan-600 to-cyan-800 hover:from-cyan-700 hover:to-cyan-900">
-        
-        <GiHamburgerMenu onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-black flex items-center w-full"/>
-        
+      <div className="hidden md:flex justify-between w-full lg:flex bg-gradient-to-r from-cyan-600 to-cyan-800 text-white">
+        <div className="flex space-x-2 ml-2 jsutify-between text-white ">
+          <CiTimer className="mt-1" />
+          <div className="text">Mon 9:00 a.m to 6:00 p.m</div>
+          <div className="flex justify-between text-2xl">
+            <CiFacebook />
+            <CiInstagram />
+            <CiTwitter />
+          </div>
+        </div>
+        <div className="flex space-x-2 mr-2">
+          <div className="flex space-x-2">
+            <CiPhone className="text-2xl" /> +91 123456789
+          </div>
+          <div className="flex space-x-2">
+            <MdMarkEmailUnread className="text-2xl mr-1" />
+            my@gmail.com
+          </div>
+        </div>
       </div>
-    
+
+      <div className="flex justify-between antialiased text-gray-900 bg-white relative overflow-hidden fixed z-30">
+        <div className="flex justify-between items-center mb-2 rounded w-10 h-10 ml-2 mt-2 text-2xl cursor-pointer lg:hidden bg-gradient-to-r from-cyan-600 to-cyan-800 hover:from-cyan-700 hover:to-cyan-900">
+          <GiHamburgerMenu
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="text-black flex items-center w-full"
+          />
+        </div>
+
         <div className="hidden lg:flex justify-center w-full">
-         <ul className="flex space-x-4 mt-5">
+          <ul className="flex space-x-4 mt-5">
             <li>
-             
               <Link to="/" className="text-lg md:text-sm">
                 <span className="text-black hover:text-cyan-800 hover:border-b-2 hover:border-b-cyan-800">
                   Home
@@ -50,7 +69,6 @@ const NewNavBar = () => {
               </Link>
             </li>
             <li>
-             
               <Link to="/" className="text-lg md:text-sm">
                 <span className="text-black hover:text-cyan-800 hover:border-b-2 hover:border-b-cyan-800">
                   About Us
@@ -58,7 +76,6 @@ const NewNavBar = () => {
               </Link>
             </li>
             <li>
-              
               <Link to="/" className="text-lg md:text-sm">
                 <span className="text-black hover:text-cyan-800 hover:border-b-2 hover:border-b-cyan-800 ">
                   Our Services
@@ -66,14 +83,12 @@ const NewNavBar = () => {
               </Link>
             </li>
             <li>
-              
               <Link to="/" className="text-lg md:text-sm">
                 <span className="text-black hover:text-cyan-800 hover:border-b-2 hover:border-b-cyan-800">
                   Our History
                 </span>
               </Link>
             </li>
-           
           </ul>
         </div>
         <div className="flex w-full p-2 justify-center">
@@ -95,21 +110,54 @@ const NewNavBar = () => {
             </button>
           </div>
           <div className="relative cursor-pointer">
-          <FaOpencart className="h-8 w-8"/>
+            <FaOpencart className="h-8 w-8" />
             <div className="absolute top-0 right-0 -mt-3 bg-red-500 text-white w-4 h-4 flex justify-center items-center rounded-full">
               0
             </div>
           </div>
+          {userDetails ? (
+            <>
+              <div>
+                <h1
+                  onClick={handleToggleLogout}
+                  className="text-cyan-700 font-bold text-2xl hover:text-cyan-500 flex cursor-pointer"
+                >
+                  <CiUser className="h-7 mt-0.5 w-7 cursor-pointer mr-2" />
+                  {userDetails.firstname} {userDetails.lastname}
+                </h1>
+                <div className="border-b-2 border-gray-200"></div>
+                {showLogout && (
+                  <div className="w-full flex justify-center">
+                    <button
+                      onClick={() => logout()}
+                      className="bg-gradient-to-r from-cyan-600 to-cyan-800 hover:from-cyan-700 hover:to-cyan-900 text-white rounded-lg mt-1 px-4 py-1 ml-2 text-red font-bold"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <CiUser
+              className="h-8 w-8 cursor-pointer"
+              onClick={() => {
+                navigate("/signup");
+              }}
+            />
+          )}
+        </div>
+        <div className="lg:hidden xl:hidden md:flex sm:flex space-x-4 justify-end items-center p-2">
           <CiUser className="h-8 w-8" />
         </div>
         <div className="lg:hidden xl:hidden md:flex sm:flex space-x-4 justify-end items-center p-2">
-        <FaOpencart className="h-8 w-8"/>
-            <div className="absolute top-0 right-0 mt-1 bg-red-500 text-white w-4 h-4 flex justify-center items-center rounded-full">
-              0
-            </div>
+          <FaOpencart className="h-8 w-8" />
+          <div className="absolute top-0 right-0 mt-1 bg-red-500 text-white w-4 h-4 flex justify-center items-center rounded-full">
+            0
           </div>
+        </div>
       </div>
-      <div className="flex antialiased text-gray-900 bg-gray-100 dark:bg-dark dark:text-light relative overflow-hidden fixed z-20">
+      <div className="flex antialiased text-gray-900 bg-gray-100 dark:bg-dark dark:text-light relative overflow-hidden z-20">
         {/* Sidebar */}
         <div
           className={`${
