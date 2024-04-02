@@ -5,6 +5,7 @@ import NewNavBar from "../components/NewNavBar";
 import useSignupStore from "../stores/signupStore";
 import Toast, { showErrorToast } from "../components/Toast";
 import { useEffect } from "react";
+import LoginGoogle from "../components/LoginGoogle";
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -124,6 +125,7 @@ const LoginScreen = () => {
             </button>
           </form>
 
+          <LoginGoogle />
           {/* Sign Up Link */}
           <Link
             to="/signup"

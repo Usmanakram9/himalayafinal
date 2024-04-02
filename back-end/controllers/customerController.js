@@ -209,8 +209,7 @@ const login = async (req, res) => {
 };
 
 const signupWithGoogle = async (req, res) => {
-  const { email, picture } = req.body;
-
+  const { email, given_name, family_name } = req.body;
   try {
     // Check if the user with the given email already exists
     let user = await Cust.findOne({ email });
@@ -218,12 +217,11 @@ const signupWithGoogle = async (req, res) => {
     if (!user) {
       // If the user does not exist, create a new user
       user = new Cust({
+        firstname: given_name,
+        lastname: family_name,
         email,
       });
 
-      await user.save();
-    } else {
-      user.alreadyGoogleUser = true;
       await user.save();
     }
 

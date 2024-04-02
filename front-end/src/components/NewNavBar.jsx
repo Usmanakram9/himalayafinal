@@ -120,7 +120,7 @@ const NewNavBar = () => {
               <div>
                 <h1
                   onClick={handleToggleLogout}
-                  className="text-cyan-700 font-bold text-2xl hover:text-cyan-500 flex cursor-pointer"
+                  className="text-cyan-700 font-bold text-2xl whitespace-nowrap hover:text-cyan-500 flex cursor-pointer"
                 >
                   <CiUser className="h-7 mt-0.5 w-7 cursor-pointer mr-2" />
                   {userDetails.firstname} {userDetails.lastname}
@@ -148,7 +148,37 @@ const NewNavBar = () => {
           )}
         </div>
         <div className="lg:hidden xl:hidden md:flex sm:flex space-x-4 justify-end items-center p-2">
-          <CiUser className="h-8 w-8" />
+          {userDetails ? (
+            <>
+              <div>
+                <h1
+                  onClick={handleToggleLogout}
+                  className="text-cyan-700 font-bold md:text-2xl text-md whitespace-nowrap hover:text-cyan-500 flex cursor-pointer"
+                >
+                  <CiUser className="md:h-6 h-4 md:mt-1 mt-1 md:w-6 w-4 cursor-pointer md:mr-2 mr-1" />
+                  {userDetails.firstname} {userDetails.lastname}
+                </h1>
+                <div className="border-b-2 border-gray-200"></div>
+                {showLogout && (
+                  <div className="w-full flex justify-center">
+                    <button
+                      onClick={() => logout()}
+                      className="bg-gradient-to-r from-cyan-600 to-cyan-800 hover:from-cyan-700 hover:to-cyan-900 text-white rounded-lg mt-1 px-4 py-1 ml-2 text-red font-bold"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <CiUser
+              className="h-8 w-8 cursor-pointer"
+              onClick={() => {
+                navigate("/signup");
+              }}
+            />
+          )}
         </div>
         <div className="lg:hidden xl:hidden md:flex sm:flex space-x-4 justify-end items-center p-2">
           <FaOpencart className="h-8 w-8" />

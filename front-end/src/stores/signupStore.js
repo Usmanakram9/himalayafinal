@@ -140,6 +140,17 @@ const useSignupStore = create(
         );
         // Assuming the response contains user details and token
         set({ user: response.data, isLoading: false });
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem(
+          "userDetails",
+          JSON.stringify({
+            _id: response.data._id,
+            firstname: response.data.firstname,
+            lastname: response.data.lastname,
+            email: response.data.email,
+          })
+        );
+        return response.data;
       } catch (error) {
         console.error("Error signing up with Google:", error);
         set({ error, isLoading: false });

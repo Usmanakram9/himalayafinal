@@ -25,6 +25,7 @@ import PaymentHistory from "./components/Admin/PaymentHistory";
 import SingleProduct from "./components/pages/SingleProduct";
 import SignUpScreen from "./screens/SignUpScreen";
 import LoginScreen from "./screens/LoginScreen";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 let isAdmin = false;
 
 const router = (
@@ -79,4 +80,10 @@ const router = (
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<React.StrictMode>{router}</React.StrictMode>);
+root.render(
+  <React.StrictMode>
+    <GoogleOAuthProvider clientId="159415962534-gf72qi9tc2qc9d4d17feoqavb3fad3ci.apps.googleusercontent.com">
+      {router}
+    </GoogleOAuthProvider>
+  </React.StrictMode>
+);

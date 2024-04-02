@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import useProductStore from "../stores/signupStore";
 import NewNavBar from "../components/NewNavBar";
 import Toast, { showErrorToast } from "../components/Toast";
+import LoginGoogle from "../components/LoginGoogle";
 
 const SignUpScreen = () => {
   const navigate = useNavigate();
@@ -203,6 +204,7 @@ const SignUpScreen = () => {
             .
           </p>
 
+          <LoginGoogle />
           {/* Sign In Link */}
           <Link
             to="/login"
