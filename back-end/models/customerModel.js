@@ -4,31 +4,26 @@ const customerSchema = new mongoose.Schema(
   {
     firstname: {
       type: String,
-      required: true,
     },
     lastname: {
       type: String,
-      required: true,
     },
     factoryname: {
       type: String,
-      required: true,
-      default: null,
     },
     email: {
       type: String,
       required: true,
       unique: true,
     },
+    password: {
+      type: String,
+    },
     contact: {
-      type: Number,
-      required: true,
-      unique: true,
+      type: String,
     },
     cnic: {
-      type: Number,
-      required: true,
-      unique: true,
+      type: String,
     },
   },
   {
@@ -36,5 +31,5 @@ const customerSchema = new mongoose.Schema(
   }
 );
 
-const cust = mongoose.model("customers", customerSchema);
-export default cust;
+const Cust = mongoose.model("Customer-Users", customerSchema);
+export default Cust;
