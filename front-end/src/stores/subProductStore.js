@@ -12,6 +12,7 @@ const subProductStore = (set) => ({
       set({ isLoading: true, error: null });
       const response = await axios.get('http://localhost:8000/api/subproducts');
       set({ data: response.data, isLoading: false });
+      return response.data;
     } catch (error) {
       console.error('Error fetching data:', error);
       set({ error, isLoading: false });
@@ -72,6 +73,7 @@ const subProductStore = (set) => ({
       set({ isLoading: true, error: null });
       const response = await axios.get(`http://localhost:8000/api/subproducts/${subProductId}`);
       set({ data: [response.data], isLoading: false });
+      return response.data;
     } catch (error) {
       console.error('Error fetching subproduct by ID:', error);
       set({ error, isLoading: false });

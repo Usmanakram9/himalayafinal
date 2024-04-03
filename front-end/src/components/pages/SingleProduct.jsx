@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Footer from "../Footer";
 import NewNavBar from "../NewNavBar";
 import BreadCrump from "../BreadCrump";
@@ -8,12 +9,19 @@ import bg2 from "../../assets/images/product2.jpg";
 import { CiSearch } from "react-icons/ci";
 import "../../assets/css/Product/SingleProduct.css";
 import { FaRupeeSign } from "react-icons/fa6";
+import useSubProductStore from "../../stores/subProductStore";
 
 import MarbleCalculator from "./utils/MarbleCalculator";
+import Loading from "../../shared/Loading";
 const SingleProduct = () => {
   const containerRef = useRef(null);
-  const [mainImage, setMainImage] = useState(bg);
+  const {id} = useParams();
+   const [mainImage, setMainImage] = useState(bg);
   const [showCalculator, setShowCalculator] = useState(false);
+  const {getSubProductById,isLoading} = useSubProductStore();
+  const [prod, setprod] = useState("");
+  const [priceData, setPriceData] = useState({});
+  
 
   const handleCalculateClick = () => {
     setShowCalculator(true);
@@ -30,9 +38,20 @@ const SingleProduct = () => {
       container.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
+
+ useEffect(() => {
+   const fetch = async ()=>{
+     const res = await getSubProductById(id);
+     setprod(res);
+    //  console.log(res);
+   }
+   fetch();
+ },[id]);
   const handleImageClick = (imageSrc) => {
     setMainImage(imageSrc);
   };
+
+  console.log(priceData);
 
   const handleMouseMove = (e) => {
     const container = containerRef.current;
@@ -56,38 +75,34 @@ const SingleProduct = () => {
         <BreadCrump items={breadcrumbItems} />
       </div>
       <div className={`${showCalculator ? 'cont' : 'h-screen'} flex p-5 justify-between space-x-6`}>
+        {isLoading  && (
+          <Loading />
+        )}
         <div className="flex w-full">
           <div className="flex flex-col space-y-8 w-1/4 sideImg p-5 ">
             <div className="img">
               <img
-                src={bg}
+                src={prod.subimage}
                 alt="bg"
                 onClick={() => handleImageClick(bg)}
                 className={mainImage === bg ? "active" : "inactive"}
               />
             </div>
-            <div className="img">
-              <img
-                src={bg1}
-                alt="bg"
-                onClick={() => handleImageClick(bg1)}
-                className={mainImage === bg1 ? "active" : "inactive"}
-              />
-            </div>
-            <div className="img">
+            
+            {/* <div className="img">
               <img
                 src={bg2}
                 alt="bg"
                 onClick={() => handleImageClick(bg2)}
                 className={mainImage === bg2 ? "active" : "inactive"}
               />
-            </div>
+            </div> */}
           </div>
           <div
             className="flex w-3/4 mainImg relative rounded"
             ref={containerRef}
           >
-            <img src={mainImage} alt="bg " className={`w-full ${showCalculator ? 'h-3/4' : 'h-h-3/4'}`} />
+            <img src={prod.subimage} alt="bg " className={`w-full ${showCalculator ? 'h-3/4' : 'h-h-3/4'}`} />
             <CiSearch className="absolute top-0 right-0 m-2 text-3xl bg-white text-black rounded" />
           </div>
         </div>
@@ -95,17 +110,16 @@ const SingleProduct = () => {
         <div className="flex flex-col w-full space-y-4">
         {!showCalculator && (
           <>
-          <div className="text-2xl font-bold">Black Granite</div>
+          <div className="text-2xl font-bold">{prod.product}</div>
          
           <div className="des text-justify">
-          Experience the pinnacle of kitchen design – a seamless combination of style, functionality, and craftsmanship. From efficient workspaces to elegant finishes, our kitchen designs are tailored to elevate your culinary experience. Embrace a space that perfectly blends beauty and practicality, creating the heart of your home.
-          </div>
+          {prod.subproddesc} </div>
           <div className="flex justify-between">
            <p>
            Price
            </p>
            <div className="flex space-x-2">
-           <p><FaRupeeSign className="text-2xl" /> </p><p>25.00/-</p>
+           <p><FaRupeeSign className="text-2xl" /> </p><p>{prod.subproPrice}</p>
            </div>
           </div>
           <button className="text-cyan-800" onClick={handleCalculateClick}>Calculate</button>
@@ -115,7 +129,8 @@ const SingleProduct = () => {
 {showCalculator && (
         <>
           <button onClick={handleReverseClick}>Reverse</button>
-          <MarbleCalculator />
+          <MarbleCalculator setPriceData={setPriceData} />
+          
         </>
       )}
           {/* i picked the marble calculator form here */}

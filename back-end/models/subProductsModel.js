@@ -3,8 +3,7 @@ import mongoose from 'mongoose';
 const subProduct = new mongoose.Schema({
 
     product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"product",
+       type: String,
     },
     subimage:{
         type: String,
@@ -14,6 +13,11 @@ const subProduct = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+    }, 
+    subproPrice:{ 
+        type: String,
+        required: true,
+       
     },
     subproddesc:{
         type: String,
