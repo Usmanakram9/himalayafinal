@@ -5,7 +5,7 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, '../himalayafinal/front-end/public/uploads/'); // Adjust the path accordingly
+    cb(null, '../himalya-enterprises/front-end/public/uploads/'); // Adjust the path accordingly
   },
   filename(req, file, cb) {
     cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);

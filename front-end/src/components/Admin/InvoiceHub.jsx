@@ -124,10 +124,7 @@ const InvoiceHub = () => {
           </svg>
         </span>
 
-        <button
-         
-          className="flex items-center text-blue-600 -px-2 hover:underline"
-        >
+        <button className="flex items-center text-blue-600 -px-2 hover:underline" >
           <FontAwesomeIcon
             icon={faFileInvoice}
             className="w-6 h-6 mx-2 text-current"

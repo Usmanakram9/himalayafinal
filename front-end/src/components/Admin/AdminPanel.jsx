@@ -4,6 +4,7 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import AdminNavbar from "./AdminNavbar";
 import AdminFooter from "./AdminFooter";
+import AdminNewNav from "./AdminNewNav";
 
 const AdminPanel = () => {
   const today = new Date();
@@ -12,6 +13,7 @@ const AdminPanel = () => {
   return (
     <>
       <AdminNavbar />
+      {/* <AdminNewNav /> */}
       <div className="flex flex-wrap gap-4 mt-10 mx-auto w-3/4 ">
         <div className="flex flex-wrap justify-between w-full">
           <div className="flex-col items-center justify-center md:flex-row md:items-start md:text-left mr-4">

@@ -8,7 +8,7 @@ import { CgSize } from "react-icons/cg";
 import { MdOutlineRoundedCorner } from "react-icons/md";
 import useMarbleCalculatorStore from '../../../stores/cartStore';
 
-const MarbleCalculator = () => {
+const MarbleCalculator = ({setPriceData}) => {
   const {
     selectedOption,
     setSelectedOption,
@@ -38,13 +38,23 @@ const MarbleCalculator = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Length:', length);
-    console.log('Width:', width);
-    console.log('Quantity:', quantity);
-    console.log('Thickness:', thickness);
-    console.log('Top Option Checked:', topOptionChecked);
-    console.log('Edge Option Checked:', edgeOptionChecked);
-    console.log('Sub Total:', subTotal);
+    // console.log('Length:', length);
+    // console.log('Width:', width);
+    // console.log('Quantity:', quantity);
+    // console.log('Thickness:', thickness);
+    // console.log('Top Option Checked:', topOptionChecked);
+    // console.log('Edge Option Checked:', edgeOptionChecked);
+    // console.log('Sub Total:', subTotal);
+    const newObj = {
+      length,
+      width,
+      quantity,
+      thickness,
+      topOptionChecked,
+      edgeOptionChecked,
+      subTotal,
+    }
+    setPriceData(newObj);
   };
 
   return (

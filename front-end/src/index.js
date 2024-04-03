@@ -37,7 +37,7 @@ const router = (
         <Route path="/products" element={<ProductsScreen />} />
         <Route path="/signup" element={<SignUpScreen />} />
         <Route path="/login" element={<LoginScreen />} />
-        <Route path="/SingleProduct" element={<SingleProduct />} />
+        <Route path="/SingleProduct/:id" element={<SingleProduct />} />
         <Route
           path="/productdetail/:productId"
           element={<ProductDetailsScreen />}
