@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import AdminNavBar from "./AdminNavbar";
 import AdminFooter from "./AdminFooter";
-import useProductStore from "../../stores/productStore";
+
 import useSubProductStore from "../../stores/subProductStore";
 import Toast, { showSuccessToast, showErrorToast } from "../Toast";
+import Loading from "../../shared/Loading";
 
 const AddSubProduct = () => {
   const [productName, setProductName] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState("");
+  const [pro, setPro] = useState("");
+  const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [buttonName, setButtonName] = useState("Add SubProduct");
   const [selectedSubProductId, setSelectedSubProductId] = useState(null);
 
-  const { data: productData, getProducts } = useProductStore();
   const {
     data: subProductData,
     getSubProducts,
@@ -26,19 +27,17 @@ const AddSubProduct = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getProducts();
       await getSubProducts();
     };
-
     fetchData();
-  }, [getProducts, getSubProducts]);
+  }, [getSubProducts]);
 
-  console.log(subProductData);
-  const handleAddProduct = async () => {
+  const handleAddProduct = async (e) => {
+    e.preventDefault();
     try {
-      if (!selectedProduct || !productName || !description || !selectedFile) {
-        throw new Error("Please fill in all fields.");
-      }
+      // if (!selectedProduct || !productName || !description || !selectedFile) {
+      //   throw new Error("Please fill in all fields.");
+      // }
 
       // Upload the image first
       const imageFormData = new FormData();
@@ -49,19 +48,20 @@ const AddSubProduct = () => {
 
       // Prepare subProduct data
       const subProductData = {
-        product: selectedProduct, // Make sure selectedProduct is the correct product ID
+        product: pro, // Make sure selectedProduct is the correct product ID
         subimage: image,
         subprodname: productName,
+        subproPrice: price, 
         subproddesc: description,
       };
 
-      if (
-        !subProductData.subimage ||
-        !subProductData.subprodname ||
-        !subProductData.subproddesc
-      ) {
-        throw new Error("Please fill in all fields.");
-      }
+      // if (
+      //   !subProductData.subimage ||
+      //   !subProductData.subprodname ||
+      //   !subProductData.subproddesc
+      // ) {
+      //   throw new Error("Please fill in all fields.");
+      // }
 
       if (selectedSubProductId) {
         await updateSubProduct(selectedSubProductId, subProductData);
@@ -74,7 +74,8 @@ const AddSubProduct = () => {
 
       // Clear form fields and reset button state
       setProductName("");
-      setSelectedProduct("");
+      setPro("");
+      setPrice("");
       setDescription("");
       setSelectedFile(null);
       setSelectedSubProductId(null);
@@ -87,11 +88,6 @@ const AddSubProduct = () => {
     }
   };
 
-  const handleDropdownChange = (e) => {
-    console.log("Selected Product ID:", e.target.value);
-    setSelectedProduct(e.target.value);
-  };
-
   // Deleteing a SubProduct
   const deleteHandler = async (subProductId) => {
     try {
@@ -102,16 +98,15 @@ const AddSubProduct = () => {
     }
   };
 
-  // Adding update functionality
-  // Adding update functionality
   const editHandler = async (subProduct) => {
     try {
       // Extract the product ID directly
       const productId = subProduct.product._id;
       console.log(productId);
       // Set the correct product ID
-      setSelectedProduct(productId);
-      setProductName(subProduct.subprodname);
+      setProductName(subProduct.product);
+      setPro(subProduct.subprodname);
+      setPrice(subProduct.subproPrice);
       setDescription(subProduct.subproddesc);
       setSelectedFile(subProduct.subimage);
       setSelectedSubProductId(subProduct._id);
@@ -120,91 +115,111 @@ const AddSubProduct = () => {
       console.error(`Error in editHandler: ${error.message}`);
     }
   };
-
-  const style = {
-    fontFamily: "Courier New",
-  };
-
   return (
     <>
       <AdminNavBar />
-      <div
-        style={style}
-        className="flex flex-col items-center justify-center h-full"
-      >
-        <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-          <div className="bg-gray-900 rounded-md p-4">
-            <h1 className="text-2xl font-bold text-white mb-4">
-              Add Sub Product
-            </h1>
-            <div className="flex flex-col mb-4">
-              <label htmlFor="productName" className="text-white mb-1">
-                Product Name
-              </label>
-              <input
-                type="text"
-                id="productName"
-                placeholder="Enter product name"
-                value={productName}
-                onChange={(e) => setProductName(e.target.value)}
-                className="p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-white"
-              />
+
+      <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+        <div className="container max-w-screen-lg mx-auto">
+          <div>
+            <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+              <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                <div className="text-gray-600">
+                  <p className="font-medium text-lg">Add Product Details</p>
+                  <p>Please fill out all the fields.</p>
+                </div>
+                <div className="lg:col-span-2">
+                  {/* <form > */}
+                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                      <div className="md:col-span-3">
+                        <label htmlFor="productName">Product Name</label>
+                        <input
+                          type="text"
+                          placeholder="Enter Product Name"
+                          id="productName"
+                          name="productName"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={productName}
+                          onChange={(e) => setProductName(e.target.value)}
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label htmlFor="pro">Product Category</label>
+                        <input
+                          placeholder="Enter Product Category"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          id="pro"
+                          name="pro"
+                          value={pro}
+                          onChange={(e) => setPro(e.target.value)}
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label htmlFor="proPrice">Product Price</label>
+                        <input
+                          placeholder="Enter Price"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          id="proPrice"
+                          name="proPrice"
+                          value={price}
+                          onChange={(e) => setPrice(e.target.value)}
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label htmlFor="image">Upload Image</label>
+                        <input
+                          type="file"
+                          id="image"
+                          onChange={(e) => setSelectedFile(e.target.files[0])}
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        />
+                      </div>
+
+                      <div className="md:col-span-5">
+                        <label htmlFor="description">Description</label>
+                        <input
+                          type="textarea"
+                          id="description"
+                          name="description"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          value={description}
+                          onChange={(e) => setDescription(e.target.value)}
+                          placeholder="Write Description"
+                        />
+                      </div>
+
+                      <div className="md:col-span-5 text-right">
+                        <div className="inline-flex items-end">
+                          <button
+                          type="button"
+                            onClick={handleAddProduct}
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          >
+                            {buttonName}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  {/* </form> */}
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col mb-4">
-              <label htmlFor="selectProduct" className="text-white mb-1">
-                Select Main Product
-              </label>
-              <select
-                id="selectProduct"
-                value={selectedProduct}
-                onChange={handleDropdownChange}
-                className="p-2 rounded border-0 bg-gray-900 outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-white"
-              >
-                {productData &&
-                  productData.map((option) => (
-                    <option key={option._id} value={option._id}>
-                      {option.nameofproduct}
-                    </option>
-                  ))}
-              </select>
-            </div>
-            <div className="flex flex-col mb-4">
-              <label htmlFor="image" className="text-white mb-1">
-                Upload Image
-              </label>
-              <input
-                type="file"
-                id="image"
-                onChange={(e) => setSelectedFile(e.target.files[0])}
-                className="p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-white"
-              />
-            </div>
-            <div className="flex flex-col mb-4">
-              <label htmlFor="description" className="text-white mb-1">
-                Description
-              </label>
-              <textarea
-                id="description"
-                placeholder="Enter product description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="p-2 rounded border-0 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-500 dark:text-white"
-              />
-            </div>
-            <button
-              className="bg-white dark:bg-[#0F172A] text-indigo-500 dark:text-white p-2 rounded hover:bg-gray-800 hover:text-white transition duration-300"
-              onClick={handleAddProduct}
-            >
-              {buttonName}
-            </button>
           </div>
         </div>
       </div>
 
-      <div
-        style={style}
-        className="flex justify-center items-center h-full mt-8 md:mt-24"
-      >
+
+      {subProductLoading && (
+        <Loading />
+      )}
+
+{subProductError && (
+        <div className="fixed top-0 left-0 right-0 flex items-center justify-center bg-red-500 text-white p-4">
+          <span>{subProductError}</span>
+        </div>
+      )}
+
+      <div className="flex justify-center items-center h-full">
         <div className="relative w-3/4 overflow-x-auto shadow-md sm:rounded-lg">
           <h1 className="text-4xl text-black text-center mb-8 md:mb-12">
             All Sub-Products
@@ -240,9 +255,7 @@ const AddSubProduct = () => {
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                   >
                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      {subProduct.product && subProduct.product.nameofproduct
-                        ? subProduct.product.nameofproduct
-                        : "N/A"}
+                      {subProduct.product}
                     </td>
                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {subProduct.subprodname}

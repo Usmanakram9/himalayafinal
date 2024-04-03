@@ -1,7 +1,7 @@
 import SubProd from "../models/subProductsModel.js";
 
 const addSubProducts = async (req, res) => {
-  const { product, subimage, subprodname, subproddesc } = req.body;
+  const { product, subimage, subprodname,subproPrice, subproddesc } = req.body;
 
   try {
     // Check if the subproduct already exists for the selected main product
@@ -16,6 +16,7 @@ const addSubProducts = async (req, res) => {
       product,
       subimage,
       subprodname,
+      subproPrice,
       subproddesc,
     });
 
@@ -24,6 +25,7 @@ const addSubProducts = async (req, res) => {
       product: addsub.product,
       subimage: addsub.subimage,
       subprodname: addsub.subprodname,
+      subproPrice: addsub.subproPrice,
       subproddesc: addsub.subproddesc,
     });
   } catch (error) {
@@ -78,6 +80,7 @@ const deletesubProduct = async (req, res) =>{
         updatesubProd.product = req.body.product || updatesubProd.product;
         updatesubProd.subimage = req.body.subimage || updatesubProd.subimage;
         updatesubProd.subprodname = req.body.subprodname || updatesubProd.subprodname;
+        updatesubProd.subproPrice = req.body.subproPrice || updatesubProd.subproPrice;
         updatesubProd.subproddesc = req.body.subproddesc || updatesubProd.subproddesc;
       
 
@@ -88,6 +91,7 @@ const deletesubProduct = async (req, res) =>{
           product: updatesubpro.product,
           subimage: updatesubpro.subimage,
           subprodname: updatesubpro.subprodname,
+          subproPrice: updatesubpro.subproPrice,
           subproddesc: updatesubpro.subproddesc
           
       })

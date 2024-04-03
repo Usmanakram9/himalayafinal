@@ -12,7 +12,7 @@ const addProduct = async (req, res) => {
         } else {
             const product = await Product.create({
                 name,
-                description,
+                description, 
                 price,
                 images
             });
