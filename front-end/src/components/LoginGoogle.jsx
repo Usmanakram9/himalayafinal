@@ -23,9 +23,8 @@ const LoginGoogle = () => {
           }
         );
 
-        console.log(userInfo);
-        // Set user information in state
         setUserInfo(response.data);
+
         const googleResponse = await signupWithGoogle(response.data);
 
         if (googleResponse) {
