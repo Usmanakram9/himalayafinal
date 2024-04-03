@@ -16,6 +16,8 @@ import { MdMarkEmailUnread } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaOpencart } from "react-icons/fa6";
 import useSignupStore from "../stores/signupStore";
+import CartModal from "./cart/CartModal";
+import useCartStore from "../stores/cartStore";
 
 const NewNavBar = () => {
   const navigate = useNavigate();
@@ -23,6 +25,12 @@ const NewNavBar = () => {
   const userDetails = JSON.parse(localStorage.getItem("userDetails"));
   const [showLogout, setShowLogout] = useState(false);
   const { logout } = useSignupStore();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { cartItems } = useCartStore();
+
+  const handleToggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
 
   const handleToggleLogout = () => {
     setShowLogout(!showLogout);
@@ -109,11 +117,13 @@ const NewNavBar = () => {
               <FontAwesomeIcon icon={faArrowRight} />
             </button>
           </div>
-          <div className="relative cursor-pointer">
+          <div className="relative cursor-pointer" onClick={handleToggleCart}>
             <FaOpencart className="h-8 w-8" />
-            <div className="absolute top-0 right-0 -mt-3 bg-red-500 text-white w-4 h-4 flex justify-center items-center rounded-full">
-              0
-            </div>
+            {cartItems && cartItems.length > 0 && (
+              <div className="absolute top-0 right-0 -mt-3 bg-red-500 text-white w-4 h-4 flex justify-center items-center rounded-full">
+                {cartItems && cartItems.length}
+              </div>
+            )}
           </div>
           {userDetails ? (
             <>
@@ -147,6 +157,7 @@ const NewNavBar = () => {
             />
           )}
         </div>
+        {isCartOpen && <CartModal onClose={() => setIsCartOpen(false)} />}
         <div className="lg:hidden xl:hidden md:flex sm:flex space-x-4 justify-end items-center p-2">
           {userDetails ? (
             <>
@@ -181,9 +192,12 @@ const NewNavBar = () => {
           )}
         </div>
         <div className="lg:hidden xl:hidden md:flex sm:flex space-x-4 justify-end items-center p-2">
-          <FaOpencart className="h-8 w-8" />
+          <FaOpencart
+            className="h-8 w-8 cursor-pointer"
+            onClick={handleToggleCart}
+          />
           <div className="absolute top-0 right-0 mt-1 bg-red-500 text-white w-4 h-4 flex justify-center items-center rounded-full">
-            0
+            {cartItems && cartItems.length}
           </div>
         </div>
       </div>

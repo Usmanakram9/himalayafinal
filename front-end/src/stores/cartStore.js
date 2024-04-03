@@ -1,38 +1,17 @@
-import {create} from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
 
-// Initial state for MarbleCalculator
-const initialState = {
-  selectedOption: 'sqt',
-  topOptionChecked: false,
-  edgeOptionChecked: false,
-  length: '',
-  width: '',
-  quantity: '',
-  thickness: '',
-  subTotal: '',
-};
+const useCartStore = create((set) => {
+  // Initialize cartItems from local storage or as an empty array if not found
+  const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-// Define the store
-const useMarbleCalculatorStore = create(persist(
-  (set) => ({
-    // State
-    ...initialState,
-    // Actions to update state
-    setSelectedOption: (option) => set({ selectedOption: option }),
-    setTopOptionChecked: (checked) => set({ topOptionChecked: checked }),
-    setEdgeOptionChecked: (checked) => set({ edgeOptionChecked: checked }),
-    setLength: (value) => set({ length: value }),
-    setWidth: (value) => set({ width: value }),
-    setQuantity: (value) => set({ quantity: value }),
-    setThickness: (value) => set({ thickness: value }),
-    setSubTotal: (value) => set({ subTotal: value }),
-    resetCalculator: () => set(initialState), // Reset all values to initial state
-  }),
-  {
-    name: 'marble-calculator-storage', // Name for localStorage
-    blacklist: ['resetCalculator'], // Exclude resetCalculator from being persisted 100
-  }
-));
+  return {
+    cartItems: savedCartItems,
+    setCartItems: (items) => {
+      // Update local storage whenever cart items are set
+      localStorage.setItem("cartItems", JSON.stringify(items));
+      set({ cartItems: items });
+    },
+  };
+});
 
-export default useMarbleCalculatorStore;
+export default useCartStore;
