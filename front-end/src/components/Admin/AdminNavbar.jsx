@@ -75,16 +75,11 @@ const AdminNavBar = () => {
               </li>
               {prodbar && (
                 <>
-                  <li className="flex items-center hover:text-yellow-500 ml-8 mt-2">
-                    <FontAwesomeIcon icon={faPlusCircle} className="w-5 h-5 mr-2" />
-                    <Link to="/admin-panel/products/addproduct">
-                      Add Product
-                    </Link>
-                  </li>
+                  
                   <li className="flex items-center hover:text-yellow-500 ml-8 mt-2">
                     <FontAwesomeIcon icon={faPlusCircle} className="w-5 h-5 mr-2" />
                     <Link to="/admin-panel/products/addsubproduct">
-                      Add Sub Product
+                      Add Product
                     </Link>
                   </li>
                 </>
@@ -126,12 +121,15 @@ const AdminNavBar = () => {
         <main className="flex flex-col items-end justify-center flex-1 mb-10">
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="fixed p-2 text-white bg-gray-900 rounded-lg top-5 left-5"
+            className={`${
+              isSidebarOpen ? "hidden" : "fixed p-2 text-white bg-gray-900 rounded-lg top-5 left-5"
+            }`}
+            
           >
             Menu
           </button>
 
-          <header className="px-1 md:px-4 py-2 shadow bg-gray-900 rounded-md p-3">
+          <header className="fixed mt-16 px-1 md:px-4 py-2 shadow bg-gray-900 rounded-md p-3 z-50">
             <div className="flex justify-between ">
               <div className="flex items-center">
                 <button
@@ -182,7 +180,7 @@ const AdminNavBar = () => {
                 )}
                 <div
                   data-dropdown
-                  className={`flex items-center px-3 py-2 focus:outline-none hover:bg-gray-800 hover:rounded-md ${
+                  className={`cursor-pointer flex items-center px-3 py-2 focus:outline-none hover:bg-gray-800 hover:rounded-md ${
                     isDropdownOpen ? "bg-gray-800 rounded-md" : ""
                   } `}
                   onClick={() => setDropdownOpen(!isDropdownOpen)}

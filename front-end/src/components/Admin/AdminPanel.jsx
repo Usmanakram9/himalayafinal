@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import AdminNavbar from "./AdminNavbar";
+
+// import AdminNewNav from "./AdminNewNav";
 import AdminFooter from "./AdminFooter";
-import AdminNewNav from "./AdminNewNav";
 
 const AdminPanel = () => {
   const today = new Date();
@@ -291,6 +292,7 @@ const AdminPanel = () => {
           </div>
         </div>
       </div>
+      <AdminFooter />
     </>
   );
 };
