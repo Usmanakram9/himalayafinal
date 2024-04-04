@@ -130,17 +130,27 @@ const NewNavBar = () => {
               <div>
                 <h1
                   onClick={handleToggleLogout}
-                  className="text-cyan-700 font-bold text-2xl whitespace-nowrap hover:text-cyan-500 flex cursor-pointer"
+                  className="text-cyan-700 font-bold text-xl whitespace-nowrap hover:text-cyan-500 flex cursor-pointer"
                 >
-                  <CiUser className="h-7 mt-0.5 w-7 cursor-pointer mr-2" />
+                  <CiUser className="h-5 mt-1 w-5 cursor-pointer mr-2" />
                   {userDetails.firstname} {userDetails.lastname}
                 </h1>
                 <div className="border-b-2 border-gray-200"></div>
                 {showLogout && (
-                  <div className="w-full flex justify-center">
+                  <div className="w-full flex flex-col justify-center">
+                    <button
+                      className="mt-2"
+                      onClick={() => {
+                        navigate("/profile");
+                      }}
+                    >
+                      <span className="bg-gradient-to-r from-cyan-600 to-cyan-800 hover:from-cyan-700 hover:to-cyan-900 text-white rounded-lg mt-1 px-6 py-1 ml-2 text-red font-bold">
+                        Profile
+                      </span>
+                    </button>
                     <button
                       onClick={() => logout()}
-                      className="bg-gradient-to-r from-cyan-600 to-cyan-800 hover:from-cyan-700 hover:to-cyan-900 text-white rounded-lg mt-1 px-4 py-1 ml-2 text-red font-bold"
+                      className="bg-gradient-to-r from-red-600 to-gray-600 hover:from-gray-700 hover:to-red-600 text-white rounded-lg mt-1 px-2 py-1 ml-2 text-red font-bold"
                     >
                       Logout
                     </button>
