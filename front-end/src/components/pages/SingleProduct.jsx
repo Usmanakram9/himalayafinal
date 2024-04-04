@@ -76,7 +76,7 @@ const SingleProduct = () => {
         <div className="flex w-full">
           <div className="flex flex-col space-y-8 w-1/4 sideImg p-5 ">
             <div className="img">
-              <img src={prod?.image} alt="bg" className="active" />
+              <img src={prod?.subimage} alt="bg" className="active" />
             </div>
 
             {/* <div className="img">
@@ -93,7 +93,7 @@ const SingleProduct = () => {
             ref={containerRef}
           >
             <img
-              src={prod?.image}
+              src={prod?.subimage}
               alt="bg "
               className={`w-full ${showCalculator ? "h-3/4" : "h-3/4"}`}
             />
