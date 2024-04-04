@@ -13,7 +13,8 @@ const InvoiceHub = () => {
     () => bills.filter((bill) => bill.customerId === id),
     [bills, id]
   );
-  const [formFieldResults, setFormFieldResults] = useState([]);
+  // ye ho skta dobara active krna pry
+  // const [formFieldResults, setFormFieldResults] = useState([]);
 
  
 
@@ -24,16 +25,16 @@ const InvoiceHub = () => {
     }
     fetch();
   }, [id, getBillsByCustomerId]);
-
-  useEffect(() => {
-    if (selectedBills.length > 0) {
-      // Iterate through each bill and extract all fields from formFields
-      const results = selectedBills.flatMap((bill) =>
-        bill.formFields.map((field) => ({ ...field }))
-      );
-      setFormFieldResults(results);
-    }
-  }, [selectedBills]);
+// ye ho skta doabara active krna pry
+  // useEffect(() => {
+  //   if (selectedBills.length > 0) {
+  //     // Iterate through each bill and extract all fields from formFields
+  //     const results = selectedBills.flatMap((bill) =>
+  //       bill.formFields.map((field) => ({ ...field }))
+  //     );
+  //     setFormFieldResults(results);
+  //   }
+  // }, [selectedBills]);
 
   const useback = useCallback(() => {
     navigate("/admin-panel/");

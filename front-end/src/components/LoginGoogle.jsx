@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import useSignupStore from "../stores/signupStore";
 
 const LoginGoogle = () => {
-  const [userInfo, setUserInfo] = useState(null);
+  // can be use in future
+  // const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
   const { signupWithGoogle } = useSignupStore();
 
@@ -22,8 +23,8 @@ const LoginGoogle = () => {
             },
           }
         );
-
-        setUserInfo(response.data);
+// future m kam a skta
+        // setUserInfo(response.data);
 
         const googleResponse = await signupWithGoogle(response.data);
 

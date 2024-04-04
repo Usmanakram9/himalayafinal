@@ -13,7 +13,7 @@ const Products = () => {
       setSubProducts(res.slice(0, 3));
     };
     fetechSubProducts();
-  }, []);
+  }, [getSubProducts]);
 
   const handleclick = async (subProductId,e) => {
     e.preventDefault();

@@ -51,7 +51,7 @@ const AddSubProduct = () => {
         product: pro, // Make sure selectedProduct is the correct product ID
         subimage: image,
         subprodname: productName,
-        subproPrice: price, 
+        subproPrice: price,
         subproddesc: description,
       };
 
@@ -130,76 +130,76 @@ const AddSubProduct = () => {
                 </div>
                 <div className="lg:col-span-2">
                   {/* <form > */}
-                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                      <div className="md:col-span-3">
-                        <label htmlFor="productName">Product Name</label>
-                        <input
-                          type="text"
-                          placeholder="Enter Product Name"
-                          id="productName"
-                          name="productName"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={productName}
-                          onChange={(e) => setProductName(e.target.value)}
-                        />
-                      </div>
-                      <div className="md:col-span-2">
-                        <label htmlFor="pro">Product Category</label>
-                        <input
-                          placeholder="Enter Product Category"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          id="pro"
-                          name="pro"
-                          value={pro}
-                          onChange={(e) => setPro(e.target.value)}
-                        />
-                      </div>
-                      <div className="md:col-span-2">
-                        <label htmlFor="proPrice">Product Price</label>
-                        <input
-                          placeholder="Enter Price"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          id="proPrice"
-                          name="proPrice"
-                          value={price}
-                          onChange={(e) => setPrice(e.target.value)}
-                        />
-                      </div>
-                      <div className="md:col-span-2">
-                        <label htmlFor="image">Upload Image</label>
-                        <input
-                          type="file"
-                          id="image"
-                          onChange={(e) => setSelectedFile(e.target.files[0])}
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                        />
-                      </div>
+                  <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                    <div className="md:col-span-3">
+                      <label htmlFor="productName">Product Name</label>
+                      <input
+                        type="text"
+                        placeholder="Enter Product Name"
+                        id="productName"
+                        name="productName"
+                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        value={productName}
+                        onChange={(e) => setProductName(e.target.value)}
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label htmlFor="pro">Product Category</label>
+                      <input
+                        placeholder="Enter Product Category"
+                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        id="pro"
+                        name="pro"
+                        value={pro}
+                        onChange={(e) => setPro(e.target.value)}
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label htmlFor="proPrice">Product Price</label>
+                      <input
+                        placeholder="Enter Price"
+                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        id="proPrice"
+                        name="proPrice"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label htmlFor="image">Upload Image</label>
+                      <input
+                        type="file"
+                        id="image"
+                        onChange={(e) => setSelectedFile(e.target.files[0])}
+                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                      />
+                    </div>
 
-                      <div className="md:col-span-5">
-                        <label htmlFor="description">Description</label>
-                        <input
-                          type="textarea"
-                          id="description"
-                          name="description"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          value={description}
-                          onChange={(e) => setDescription(e.target.value)}
-                          placeholder="Write Description"
-                        />
-                      </div>
+                    <div className="md:col-span-5">
+                      <label htmlFor="description">Description</label>
+                      <input
+                        type="text"
+                        id="description"
+                        name="description"
+                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Write Description"
+                      />
+                    </div>
 
-                      <div className="md:col-span-5 text-right">
-                        <div className="inline-flex items-end">
-                          <button
+                    <div className="md:col-span-5 text-right">
+                      <div className="inline-flex items-end">
+                        <button
                           type="button"
-                            onClick={handleAddProduct}
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                          >
-                            {buttonName}
-                          </button>
-                        </div>
+                          onClick={handleAddProduct}
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                          {buttonName}
+                        </button>
                       </div>
                     </div>
+                  </div>
                   {/* </form> */}
                 </div>
               </div>
@@ -208,12 +208,9 @@ const AddSubProduct = () => {
         </div>
       </div>
 
+      {subProductLoading && <Loading />}
 
-      {subProductLoading && (
-        <Loading />
-      )}
-
-{subProductError && (
+      {subProductError && (
         <div className="fixed top-0 left-0 right-0 flex items-center justify-center bg-red-500 text-white p-4">
           <span>{subProductError}</span>
         </div>
