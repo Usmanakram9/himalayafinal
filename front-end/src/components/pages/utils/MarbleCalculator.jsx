@@ -100,12 +100,12 @@ const MarbleCalculator = ({ prodPri }) => {
     prodPri,
   ]);
 
-  const calculateTotal = () => {
+  const calculateTotal = (prodPrice, toppoolishrate, edgepoolishrate) => {
     setSubTotal(parseInt(prodPrice + toppoolishrate + edgepoolishrate));
   };
 
   useEffect(() => {
-    calculateTotal();
+    calculateTotal(prodPrice, toppoolishrate, edgepoolishrate);
   }, [prodPrice, toppoolishrate, edgepoolishrate]);
 
   const handleSubmit = () => {
