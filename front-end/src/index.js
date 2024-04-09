@@ -28,6 +28,7 @@ import LoginScreen from "./screens/LoginScreen";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ProductList from "./screens/ProductList";
 import ProfileScreen from "./screens/ProfileScreen";
+import Payment from "./components/pages/Payment";
 let isAdmin = false;
 
 const router = (
@@ -42,6 +43,7 @@ const router = (
         <Route path="/SingleProduct/:id" element={<SingleProduct />} />
         <Route path="/product-list" element={<ProductList />} />
         <Route path="/profile" element={<ProfileScreen />} />
+        <Route path="payment" element={<Payment />} />
         <Route
           path="/productdetail/:productId"
           element={<ProductDetailsScreen />}

@@ -17,7 +17,7 @@ const SingleProduct = () => {
   const [showCalculator, setShowCalculator] = useState(false);
   const { getSubProductById, isLoading } = useSubProductStore();
   const [prod, setprod] = useState("");
-  const [priceData, setPriceData] = useState({});
+  
 
   const handleCalculateClick = () => {
     setShowCalculator(true);
@@ -44,7 +44,7 @@ const SingleProduct = () => {
     fetch();
   }, [id, getSubProductById]);
 
-  console.log(priceData);
+  
 
   const handleMouseMove = (e) => {
     const container = containerRef.current;
