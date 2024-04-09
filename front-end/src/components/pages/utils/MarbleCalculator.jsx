@@ -100,12 +100,22 @@ const MarbleCalculator = ({ prodPri }) => {
     prodPri,
   ]);
 
-  const calculateTotal = (prodPrice, toppoolishrate, edgepoolishrate) => {
-    setSubTotal(parseInt(prodPrice + toppoolishrate + edgepoolishrate));
-  };
+
+  
 
   useEffect(() => {
-    calculateTotal(prodPrice, toppoolishrate, edgepoolishrate);
+
+    const calculateTotal = () => {
+      // ParseInt will return NaN if the value is not a number, so use parseFloat instead
+      // Ensure to provide a default value of 0 if the value is falsy
+      const edgeRate = parseFloat(edgepoolishrate) || 0;
+      const topRate = parseFloat(toppoolishrate) || 0;
+      const productPrice = parseFloat(prodPrice) || 0;
+    
+      setSubTotal(productPrice + topRate + edgeRate);
+    };
+    
+    calculateTotal();
   }, [prodPrice, toppoolishrate, edgepoolishrate]);
 
   const handleSubmit = () => {
